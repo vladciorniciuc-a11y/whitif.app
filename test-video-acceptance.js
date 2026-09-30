@@ -93,7 +93,7 @@ assert(html.includes('id="roadmapQuickNav"'), '25. Quick Navigation Dock (#roadm
 assert(html.includes('id="btnSpotlightDirect"'), '26. Top Button (#btnSpotlightDirect) present in HTML');
 assert(html.includes('id="btnPrevScene"'), '27. Middle Button (#btnPrevScene) present in HTML');
 assert(html.includes('id="btnPrologueDirect"'), '28. Bottom Button (#btnPrologueDirect) present in HTML');
-assert(html.includes('data-lucide="projector"'), '29. Button 1 uses "projector" icon (📽 proiector spotlight)');
+assert(html.includes('projector-profile-icon'), '29. Button 1 uses 35mm cinema projector in profile icon (📽)');
 assert(html.includes('data-lucide="step-back"'), '30. Button 2 uses "step-back" icon (⏮ cu bara)');
 assert(html.includes('data-lucide="clapperboard"'), '31. Button 3 uses "clapperboard" icon (🎬 clacheta)');
 assert(html.includes('title="Spotlight Finale"') && html.includes('>Spotlight Finale<'), '32. Button 1 has English tooltip: "Spotlight Finale"');

@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=196400" />
+  <link rel="stylesheet" href="assets/css/style.css?v=196600" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -216,9 +216,21 @@
 
     <!-- Right Side Quick Chapter Navigation Dock (Visible from Scene 01+, docked directly under the roadmap bar) -->
     <aside id="roadmapQuickNav" class="roadmap-quick-dock opacity-0 pointer-events-none translate-y-3 transition-all duration-500" aria-label="Quick Chapter Navigation">
-      <!-- Button 1: Jump to Spotlight Finale (📽 projector) -->
+      <!-- Button 1: Jump to Spotlight Finale (📽 35mm cinema projector in profile) -->
       <button id="btnSpotlightDirect" class="roadmap-circle-btn group" title="Spotlight Finale" aria-label="Spotlight Finale">
-        <i data-lucide="projector" class="w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:scale-110"></i>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="projector-profile-icon w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:scale-110">
+          <circle cx="6.5" cy="5.5" r="3.5"></circle>
+          <circle cx="15.5" cy="5.5" r="3.5"></circle>
+          <circle cx="6.5" cy="5.5" r="0.8" fill="currentColor"></circle>
+          <circle cx="15.5" cy="5.5" r="0.8" fill="currentColor"></circle>
+          <path d="M6.5 9v3"></path>
+          <path d="M15.5 9v3"></path>
+          <path d="M10 4.5h2"></path>
+          <rect x="4" y="12" width="12" height="7" rx="1.5"></rect>
+          <path d="M16 13.5l4.5-2.2v6.4l-4.5-2.2"></path>
+          <path d="M10 19v3"></path>
+          <path d="M7 22h6"></path>
+        </svg>
         <span class="btn-side-tooltip">Spotlight Finale</span>
       </button>
       <!-- Button 2: Previous Chapter (⏮ cu bară - step-back) -->
