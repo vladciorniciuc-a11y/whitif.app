@@ -1,0 +1,784 @@
+/* ==========================================================================
+   THE INDEPENDENT FILMMAKER OS - CINEMATIC STYLES
+   - Tactile Photo/Video Frame Stacking (Memory Box Metaphor)
+   - 3-Epoch Margins: Analog 35mm -> Hybrid DI -> Pure Digital Cinema
+   - Splice Line Light Leak Burst
+   - 15 Chromatic Scrims (Noir to Pure Radiant White)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap');
+
+:root {
+  --color-bg: #030805;
+  --color-bg-secondary: #0d231a;
+  --color-card-bg: #eef3e8;
+  --color-card-text: #13241b;
+  --color-accent-gold: #d4af37;
+  --color-accent-amber: #e6b85c;
+  --color-sage: #9bb098;
+  --color-cream: #f4f7f1;
+  --color-hud-green: #38e07b;
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Cinzel', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   3-EPOCH MARGINS ENGINE: ANALOG -> HYBRID -> DIGITAL
+   ========================================================================== */
+.margin-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  z-index: 80;
+  pointer-events: none;
+  background-color: #030805;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  transition: all 0.6s ease;
+}
+
+.margin-rail-left {
+  left: 0;
+  border-right: 1.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.margin-rail-right {
+  right: 0;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 1. Epoch Analog Track (35mm Sprocket Holes) */
+.analog-sprockets {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='16' y='11' width='20' height='26' rx='4' ry='4' fill='%23000000' stroke='%23223528' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.film-edge-code {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: rgba(212, 175, 55, 0.35);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-transform: uppercase;
+  transition: opacity 0.6s ease;
+}
+.margin-rail-left .film-edge-code { left: 4px; top: 35%; }
+.margin-rail-right .film-edge-code { right: 4px; top: 40%; }
+
+/* 2. Epoch Hybrid (Optical Sound Waveform & Digital Timecode) */
+.hybrid-elements {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px 0;
+}
+
+.optical-waveform-bar {
+  width: 4px;
+  height: 60px;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 2px, #38e07b 2px, #38e07b 4px);
+  opacity: 0.6;
+}
+
+/* 3. Epoch Digital (VU Meter Bars & Sensor Telemetry) */
+.digital-elements {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 0;
+}
+
+/* Digital Audio VU Meters (Left Rail) */
+.vu-meter-bar {
+  width: 14px;
+  height: 4px;
+  border-radius: 1px;
+  background: #233527;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.vu-meter-bar.active-green {
+  background: #38e07b;
+  box-shadow: 0 0 6px #38e07b;
+}
+.vu-meter-bar.active-gold {
+  background: #d4af37;
+  box-shadow: 0 0 8px #d4af37;
+}
+
+/* Digital Sensor Telemetry (Right Rail) */
+.digital-sensor-code {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: #38e07b;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-transform: uppercase;
+}
+
+/* Margin State Classes (Applied by GSAP) */
+body.epoch-analog .analog-sprockets { opacity: 1; }
+body.epoch-analog .film-edge-code { opacity: 1; }
+body.epoch-analog .hybrid-elements { opacity: 0; }
+body.epoch-analog .digital-elements { opacity: 0; }
+
+body.epoch-hybrid .analog-sprockets { opacity: 0.4; }
+body.epoch-hybrid .film-edge-code { opacity: 0.4; }
+body.epoch-hybrid .hybrid-elements { opacity: 1; }
+body.epoch-hybrid .digital-elements { opacity: 0; }
+
+body.epoch-digital .analog-sprockets { opacity: 0; }
+body.epoch-digital .film-edge-code { opacity: 0; }
+body.epoch-digital .hybrid-elements { opacity: 0; }
+body.epoch-digital .digital-elements { opacity: 1; }
+body.epoch-digital .margin-rail {
+  background-color: #020704;
+  border-color: rgba(56, 224, 123, 0.25);
+  box-shadow: 0 0 25px rgba(56, 224, 123, 0.15);
+}
+
+@media (max-width: 768px) {
+  .margin-rail { width: 20px; }
+  .film-edge-code, .digital-sensor-code { display: none; }
+}
+
+/* ==========================================================================
+   TACTILE PHOTO/VIDEO FRAME STACKING (DESK CONTAINER)
+   ========================================================================== */
+.story-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  will-change: transform;
+  padding: 18px 60px;
+}
+
+@media (max-width: 768px) {
+  .story-section { padding: 12px 24px; }
+}
+
+/* The Tangible Photo/Video Frame (Resting on the Director's Desk) */
+.photo-frame {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 36px);
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  /* Physical Frame Border like Archival Mount */
+  border: 4px solid rgba(22, 38, 28, 0.9);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.95), 0 20px 45px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Video inside the Frame */
+.video-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.65;
+  filter: contrast(1.1) brightness(0.9);
+}
+
+/* ==========================================================================
+   FRAME SPLICE LINE & OPTICAL LIGHT LEAK BURST
+   ========================================================================== */
+.frame-splice-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #020603;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.95);
+  z-index: 30;
+}
+
+.splice-light-leak {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  pointer-events: none;
+  z-index: 35;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 140, 40, 0.4) 15%, 
+    rgba(255, 215, 80, 0.95) 35%, 
+    #ffffff 50%, 
+    rgba(255, 215, 80, 0.95) 65%, 
+    rgba(255, 140, 40, 0.4) 85%, 
+    transparent 100%);
+  box-shadow: 0 0 45px 16px rgba(255, 195, 65, 0.95), 0 0 90px 30px rgba(255, 110, 20, 0.5);
+  filter: blur(1px);
+  will-change: opacity;
+}
+
+.splice-light-leak::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent 0%, rgba(130, 230, 255, 0.9) 35%, #ffffff 50%, rgba(130, 230, 255, 0.9) 65%, transparent 100%);
+  box-shadow: 0 0 22px 7px rgba(130, 230, 255, 0.85);
+}
+
+/* ==========================================================================
+   THE 15 CHROMATIC SCENE SCRIMS (FROM NOIR TO PURE WHITE ILLUMINATION)
+   ========================================================================== */
+.section-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: background 0.8s ease;
+}
+
+.scrim-00-noir { background: radial-gradient(circle at center, rgba(5, 13, 9, 0.35) 0%, rgba(5, 13, 9, 0.95) 85%); }
+.scrim-01-crimson { background: radial-gradient(circle at center, rgba(42, 8, 14, 0.45) 0%, rgba(18, 4, 7, 0.92) 85%); }
+.scrim-02-carmine { background: radial-gradient(circle at center, rgba(48, 14, 10, 0.45) 0%, rgba(22, 6, 4, 0.92) 85%); }
+.scrim-03-terracotta { background: radial-gradient(circle at center, rgba(52, 24, 10, 0.45) 0%, rgba(26, 12, 4, 0.92) 85%); }
+.scrim-04-amber { background: radial-gradient(circle at center, rgba(50, 32, 10, 0.45) 0%, rgba(26, 16, 5, 0.92) 85%); }
+.scrim-05-ochre { background: radial-gradient(circle at center, rgba(46, 38, 12, 0.45) 0%, rgba(24, 20, 6, 0.92) 85%); }
+.scrim-06-brass { background: radial-gradient(circle at center, rgba(34, 40, 14, 0.45) 0%, rgba(17, 20, 7, 0.92) 85%); }
+.scrim-07-forest { background: radial-gradient(circle at center, rgba(13, 42, 26, 0.45) 0%, rgba(7, 22, 14, 0.92) 85%); }
+.scrim-08-emerald { background: radial-gradient(circle at center, rgba(14, 48, 34, 0.45) 0%, rgba(7, 26, 18, 0.92) 85%); }
+.scrim-09-sage { background: radial-gradient(circle at center, rgba(18, 50, 42, 0.45) 0%, rgba(9, 27, 23, 0.92) 85%); }
+.scrim-10-teal { background: radial-gradient(circle at center, rgba(12, 46, 54, 0.45) 0%, rgba(6, 24, 28, 0.92) 85%); }
+.scrim-11-cyan { background: radial-gradient(circle at center, rgba(10, 40, 62, 0.45) 0%, rgba(5, 21, 33, 0.92) 85%); }
+.scrim-12-indigo { background: radial-gradient(circle at center, rgba(20, 24, 58, 0.45) 0%, rgba(10, 12, 30, 0.92) 85%); }
+.scrim-13-platinum { background: radial-gradient(circle at center, rgba(35, 45, 55, 0.35) 0%, rgba(18, 24, 30, 0.88) 85%); }
+
+/* 14: PURE RADIANT WHITE CLIMAX */
+.scrim-14-radiant-white {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(245, 248, 242, 0.98) 75%, #ffffff 100%);
+}
+
+.scrim-14-radiant-white ~ .story-pinned .climax-title h2 { color: #07150e !important; }
+.scrim-14-radiant-white ~ .story-pinned .climax-title p { color: #132c21 !important; }
+.scrim-14-radiant-white ~ .story-pinned .climax-card { color: #1a3828 !important; }
+
+#scene-14 .photo-frame {
+  background-color: #ffffff;
+  border-color: rgba(13, 35, 26, 0.4);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35), 0 0 100px rgba(255, 255, 255, 0.9);
+}
+
+/* Volumetric Spotlights (Intro & Outro) */
+.spotlight-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.spotlight-beam-left {
+  position: absolute;
+  top: -20%;
+  left: 20%;
+  width: 280px;
+  height: 140%;
+  background: conic-gradient(from 165deg at 50% 0%, transparent 0deg, rgba(235, 245, 220, 0.16) 18deg, transparent 36deg);
+  filter: blur(28px);
+  transform: rotate(-18deg);
+  transform-origin: top center;
+  animation: spotlightSwayLeft 12s ease-in-out infinite alternate;
+}
+
+.spotlight-beam-right {
+  position: absolute;
+  top: -20%;
+  right: 20%;
+  width: 280px;
+  height: 140%;
+  background: conic-gradient(from 195deg at 50% 0%, transparent 0deg, rgba(235, 245, 220, 0.16) 18deg, transparent 36deg);
+  filter: blur(28px);
+  transform: rotate(18deg);
+  transform-origin: top center;
+  animation: spotlightSwayRight 14s ease-in-out infinite alternate;
+}
+
+.spotlight-glow-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(26, 60, 44, 0.22) 45%, transparent 70%);
+  filter: blur(40px);
+}
+
+@keyframes spotlightSwayLeft {
+  0% { transform: rotate(-22deg) scale(0.95); opacity: 0.7; }
+  100% { transform: rotate(-12deg) scale(1.05); opacity: 0.95; }
+}
+
+@keyframes spotlightSwayRight {
+  0% { transform: rotate(22deg) scale(0.95); opacity: 0.7; }
+  100% { transform: rotate(12deg) scale(1.05); opacity: 0.95; }
+}
+
+.film-card {
+  background: var(--color-card-bg);
+  color: var(--color-card-text);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(13, 35, 26, 0.15);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  will-change: transform, opacity;
+}
+
+.section-badge, .section-title {
+  will-change: transform, opacity;
+}
+
+.hero-scroll-indicator {
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+  opacity: 1;
+  transform: translateY(3px);
+}
+
+/* ==========================================================================
+   ROADMAP NAVIGATION BAR (00 AT BOTTOM -> 14 AT TOP)
+   ========================================================================= */
+.roadmap-nav {
+  position: fixed;
+  right: 64px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 85;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 7px;
+  background: rgba(7, 21, 14, 0.88);
+  backdrop-filter: blur(20px);
+  padding: 16px 10px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.roadmap-track {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 22px;
+  top: 22px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.roadmap-progress-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to top, #d4af37, #ffe082);
+  box-shadow: 0 0 10px #d4af37;
+  border-radius: 2px;
+  transition: height 0.25s ease-out;
+}
+
+.roadmap-dot {
+  position: relative;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  border: 2px solid rgba(7, 21, 14, 0.9);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.roadmap-dot:hover {
+  background: var(--color-accent-gold);
+  transform: scale(1.35);
+}
+
+.roadmap-dot.active {
+  background: var(--color-accent-gold);
+  border-color: #fff;
+  transform: scale(1.35);
+  box-shadow: 0 0 16px var(--color-accent-gold), 0 0 4px #fff;
+}
+
+.roadmap-dot .dot-label {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(9, 24, 17, 0.96);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: var(--color-cream);
+  padding: 5px 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.roadmap-dot:hover .dot-label,
+.roadmap-dot.active .dot-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Camera HUD Bar */
+.camera-hud {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 10px 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(230, 240, 225, 0.7);
+  z-index: 85;
+  pointer-events: none;
+}
+.camera-hud-top { top: 12px; }
+.camera-hud-bottom { bottom: 12px; }
+
+.rec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff334b;
+  font-weight: 700;
+}
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ff334b;
+  border-radius: 50%;
+  animation: recBlink 1.2s infinite;
+}
+
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.gold-button {
+  background: linear-gradient(135deg, #e4be5c 0%, #b89332 100%);
+  color: #081710;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+}
+
+.gold-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(212, 175, 55, 0.6);
+}
+
+/* Audio Experience Tooltip */
+.audio-experience-tooltip {
+  backdrop-filter: blur(12px);
+  animation: tooltipFloat 2.8s ease-in-out infinite;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.pointing-finger {
+  display: inline-block;
+  animation: pointPulse 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes pointPulse {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(5px); }
+}
+
+@keyframes tooltipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Lenis Smooth Scroll Core Rules */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ==========================================================================
+   CINEMATIC VIDEO REPLAY ENGINE (STOP AT LAST FRAME + REPLAY BUTTON)
+   ========================================================================== */
+.video-replay-btn {
+  position: absolute;
+  z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 20px;
+  border-radius: 9999px;
+  background: rgba(3, 8, 5, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  color: #d4af37;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.video-replay-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-replay-btn .video-replay-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.15);
+  color: inherit;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.video-replay-btn:hover {
+  background: #d4af37;
+  color: #030805;
+  border-color: #d4af37;
+  box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+}
+
+.video-replay-btn:hover .video-replay-icon-box {
+  background: rgba(0, 0, 0, 0.25);
+  transform: scale(1.1);
+}
+
+/* Position for Scenes 01 to 13 (Open visual center above titles) */
+.replay-btn-scene-default {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+}
+
+.replay-btn-scene-default.visible {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.replay-btn-scene-default:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+/* Position for Scene 00 (Unobtrusive lower anchor, text stays 100% visible) */
+.replay-btn-scene-00 {
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.92);
+}
+
+.replay-btn-scene-00.visible {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.replay-btn-scene-00:hover {
+  transform: translateX(-50%) translateY(-2px) scale(1.06);
+}
+
+/* Position for Scene 14 Climax (Pure Radiant White Theme) */
+.replay-btn-scene-climax {
+  bottom: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px) scale(0.92);
+  background: rgba(238, 243, 232, 0.95);
+  border: 1.5px solid rgba(13, 35, 26, 0.5);
+  color: #0d231a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.replay-btn-scene-climax.visible {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.replay-btn-scene-climax:hover {
+  background: #0d231a;
+  color: #f4f7f1;
+  border-color: #0d231a;
+  box-shadow: 0 12px 35px rgba(13, 35, 26, 0.35);
+  transform: translateX(-50%) translateY(-2px) scale(1.06);
+}
+
+.replay-btn-scene-climax .video-replay-icon-box {
+  background: rgba(13, 35, 26, 0.12);
+}
+
+.replay-btn-scene-climax:hover .video-replay-icon-box {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   ROADMAP QUICK NAVIGATION DOCK (CIRCULAR 1-ARROW & 2-ARROWS BUTTONS)
+   ========================================================================== */
+.roadmap-quick-dock {
+  position: fixed;
+  right: 56px;
+  bottom: 74px;
+  z-index: 86;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.roadmap-circle-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 21, 14, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 15px rgba(212, 175, 55, 0.15);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.roadmap-circle-btn:hover {
+  background: #d4af37;
+  border-color: #d4af37;
+  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(2px) scale(1.08);
+}
+
+.roadmap-circle-btn .btn-side-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: rgba(7, 21, 14, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f4f7f1;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.roadmap-circle-btn:hover .btn-side-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 1024px) {
+  .roadmap-quick-dock {
+    right: 18px;
+    bottom: 70px;
+  }
+}

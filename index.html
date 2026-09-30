@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>if. — The Independent Filmmaker OS | A place for the film</title>
+  <meta name="description" content="The unified cinematic operating system for independent filmmakers. From screenplay and financing to set and distribution." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#07150e',
+              forest: '#0d231a',
+              deep: '#132c21',
+              card: '#eef3e8',
+              cardDark: '#1a3327',
+              gold: '#d4af37',
+              amber: '#e6b85c',
+              cream: '#f4f7f1',
+              sage: '#9bb098'
+            }
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Local Verified Scripts -->
+  <script src="assets/js/lenis.min.js"></script>
+  <script src="assets/js/gsap.min.js"></script>
+  <script src="assets/js/ScrollTrigger.min.js"></script>
+  <script src="assets/js/lucide.min.js"></script>
+
+  <!-- Local Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css?v=195800" />
+</head>
+<body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
+
+  <!-- Film Grain Overlay -->
+  <div class="film-grain"></div>
+
+  <!-- Left Margin Rail: 3-Epoch Evolving Film Edge -->
+  <div class="margin-rail margin-rail-left">
+    <!-- Epoch 1: Analog 35mm Perforations & Edge Code -->
+    <div class="analog-sprockets"></div>
+    <div class="film-edge-code">KODAK VISION3 5219 // 35MM CELLULOID // 24 FPS</div>
+
+    <!-- Epoch 2: Hybrid Optical Sound Waveform -->
+    <div class="hybrid-elements">
+      <div class="optical-waveform-bar"></div>
+      <div class="optical-waveform-bar"></div>
+      <div class="optical-waveform-bar"></div>
+      <div class="optical-waveform-bar"></div>
+    </div>
+
+    <!-- Epoch 3: Digital Cinema VU Audio Meter -->
+    <div class="digital-elements">
+      <span class="text-[7px] font-mono text-[#38e07b] tracking-wider mb-1">CH 1/2</span>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+      <div class="vu-meter-bar"></div>
+    </div>
+  </div>
+
+  <!-- Right Margin Rail: 3-Epoch Evolving Film Edge -->
+  <div class="margin-rail margin-rail-right">
+    <!-- Epoch 1: Analog 35mm Perforations & Edge Code -->
+    <div class="analog-sprockets"></div>
+    <div class="film-edge-code">IF-OS FOOTAGE // 35MM FULL APERTURE // 24 FPS</div>
+
+    <!-- Epoch 2: Hybrid Digital Timecode & Optical Track -->
+    <div class="hybrid-elements">
+      <span class="text-[7px] font-mono text-[#38e07b] tracking-widest rotate-90 my-6">4K SCAN 12-BIT LOG</span>
+      <div class="optical-waveform-bar"></div>
+      <div class="optical-waveform-bar"></div>
+    </div>
+
+    <!-- Epoch 3: Digital Cinema Sensor Telemetry -->
+    <div class="digital-elements">
+      <div class="digital-sensor-code">ARRIRAW 4.5K // ACEScg // 17 STOPS // 24.00 FPS</div>
+    </div>
+  </div>
+
+  <!-- Top Camera HUD -->
+  <header class="camera-hud camera-hud-top flex justify-between items-center z-50">
+    <div class="flex items-center gap-6">
+      <div class="rec-badge">
+        <span class="rec-dot"></span>
+        <span>REC</span>
+      </div>
+      <div class="text-[#38e07b] flex items-center gap-2">
+        <i data-lucide="timer" class="w-3.5 h-3.5"></i>
+        <span id="hudTimecode">00:00:00:00</span>
+      </div>
+      <div class="hidden md:flex items-center gap-3 text-white/50 text-[10px]">
+        <span>35MM CELLULOID</span>
+        <span>•</span>
+        <span>SHUTTER: 180°</span>
+        <span>•</span>
+        <span>ISO: 800</span>
+      </div>
+    </div>
+
+    <!-- Center Brand mark -->
+    <a href="https://withif.app/" class="flex items-center gap-2 pointer-events-auto hover:opacity-80 transition">
+      <span class="font-serif font-bold text-lg text-white">if.</span>
+      <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-[#9bb098] uppercase">The Independent Filmmaker OS</span>
+    </a>
+
+    <!-- Right HUD Info & Direct Login CTA -->
+    <div class="flex items-center gap-4">
+      <span id="hudSceneNumber" class="text-[#d4af37] font-bold">SCENE 00</span>
+      <a href="https://withif.app/" target="_blank" rel="noopener noreferrer" 
+         class="pointer-events-auto hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37]/10 transition text-[11px] font-mono tracking-wider">
+        <span>ENTER OS</span>
+        <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Bottom Camera HUD -->
+  <footer class="camera-hud camera-hud-bottom flex justify-between items-center z-50">
+    <div class="flex items-center gap-4">
+      <span class="text-white/40 text-[10px]">LENS: 35MM T1.5 ANAMORPHIC</span>
+      <span class="hidden md:inline text-white/40 text-[10px]">GATE: 35MM FULL APERTURE</span>
+    </div>
+
+    <!-- Bottom-Right Audio Controller & Tooltip (Hidden in Scene 00 Silent Prologue, appears on Scene 01+) -->
+    <div id="audioToggleContainer" class="relative flex items-center gap-3 transition-all duration-700 opacity-0 translate-y-3 pointer-events-none">
+      <!-- Tooltip pointing to the audio button -->
+      <div id="audioTooltip" class="audio-experience-tooltip flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0d231a]/95 border border-[#d4af37]/60 text-white shadow-xl shadow-black/80 text-[11px] font-mono whitespace-nowrap">
+        <span class="text-[#f4f7f1]">for a better experience</span>
+        <span class="pointing-finger text-sm inline-block">👉</span>
+      </div>
+
+      <button id="audioToggleBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0d231a]/90 border border-white/20 hover:border-[#d4af37] transition-all text-[11px] font-mono shadow-lg">
+        <i data-lucide="volume-x" id="audioIcon" class="w-3.5 h-3.5 text-white/70"></i>
+        <span id="audioStatusText" class="text-white/80">SOUND [OFF]</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Right Side Director's Roadmap Navigation Bar (Ascending: 00 at bottom -> 14 at top) -->
+  <nav class="roadmap-nav hidden lg:flex" aria-label="Roadmap Navigation">
+    <div class="roadmap-track">
+      <div id="roadmapProgressBar" class="roadmap-progress-fill"></div>
+    </div>
+
+    <!-- 00 Prologue at the very bottom -->
+    <div class="roadmap-dot active" data-target="#scene-00" data-index="0">
+      <span class="dot-label">00 // Prologue (Spotlight)</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-01" data-index="1">
+      <span class="dot-label">01 // My Next Chapter</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-02" data-index="2">
+      <span class="dot-label">02 // Film Compass</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-03" data-index="3">
+      <span class="dot-label">03 // Writing</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-04" data-index="4">
+      <span class="dot-label">04 // Film Library & Brief</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-05" data-index="5">
+      <span class="dot-label">05 // Money & Funding</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-06" data-index="6">
+      <span class="dot-label">06 // Application Rehearsals</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-07" data-index="7">
+      <span class="dot-label">07 // Today & Week</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-08" data-index="8">
+      <span class="dot-label">08 // Pitch</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-09" data-index="9">
+      <span class="dot-label">09 // In-platform Observations</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-10" data-index="10">
+      <span class="dot-label">10 // The Candid Report</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-11" data-index="11">
+      <span class="dot-label">11 // What Was Tested</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-12" data-index="12">
+      <span class="dot-label">12 // What We Improved</span>
+    </div>
+    <div class="roadmap-dot" data-target="#scene-13" data-index="13">
+      <span class="dot-label">13 // Acceptance Checks</span>
+    </div>
+    <!-- 14 Spotlight Finale at the very top -->
+    <div class="roadmap-dot" data-target="#scene-14" data-index="14">
+      <span class="dot-label">14 // Spotlight Finale (Climax)</span>
+    </div>
+  </nav>
+
+  <!-- Right Side Quick Chapter Navigation Dock (Visible from Scene 01+) -->
+  <aside id="roadmapQuickNav" class="roadmap-quick-dock opacity-0 pointer-events-none translate-y-3 transition-all duration-500" aria-label="Quick Chapter Navigation">
+    <!-- Button 1: Previous Chapter (1 Arrow Down) -->
+    <button id="btnPrevScene" class="roadmap-circle-btn group" title="Capitolul precedent" aria-label="Previous Chapter">
+      <i data-lucide="chevron-down" class="w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:translate-y-0.5"></i>
+      <span class="btn-side-tooltip">Capitolul precedent</span>
+    </button>
+    <!-- Button 2: Direct to Prologue at the base of roadmap (2 Arrows Down) -->
+    <button id="btnPrologueDirect" class="roadmap-circle-btn group" title="Înapoi la Prologue" aria-label="Return to Prologue">
+      <i data-lucide="chevrons-down" class="w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:translate-y-0.5"></i>
+      <span class="btn-side-tooltip">Înapoi la Prologue</span>
+    </button>
+  </aside>
+
+  <!-- MAIN SCROLL CONTAINER -->
+  <main id="smooth-wrapper" class="relative w-full overflow-hidden">
+    <!-- =========================================================================
+         SCENE 00 // PROLOGUE
+         ========================================================================= -->
+    <section id="scene-00" class="story-section" data-scene-code="SCENE 00 // PROLOGUE">
+      <div class="photo-frame">
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/sample.mp4?v=172247" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask: Noir Absolute -->
+        <div class="section-scrim scrim-00-noir"></div>
+
+        <!-- Volumetric Spotlights -->
+        <div class="spotlight-container hero-spotlight-box">
+          <div class="spotlight-beam-left"></div>
+          <div class="spotlight-beam-right"></div>
+          <div class="spotlight-glow-center"></div>
+        </div>
+
+        <div class="story-pinned z-20 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto hero-content-wrapper h-full">
+          <div class="hero-logo-box mb-6">
+            <h1 class="font-serif text-7xl sm:text-9xl md:text-[10rem] font-bold tracking-tight text-white drop-shadow-2xl leading-none">
+              if<span class="text-[#d4af37]">.</span>
+            </h1>
+            <p class="font-serif italic text-2xl sm:text-3xl text-emerald-100/90 mt-2 font-normal">
+              The Independent Filmmaker OS
+            </p>
+          </div>
+
+          <div class="hero-tagline max-w-xl mx-auto mb-10">
+            <p class="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#9bb098] mb-3">
+              A place for the film.
+            </p>
+            <p class="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
+              From the first spark of the screenplay to the spotlights of the premiere. A unified operating system crafted exclusively for independent cinema.
+            </p>
+          </div>
+
+          <div class="hero-scroll-indicator flex flex-col items-center gap-3 text-white/60 cursor-pointer">
+            <span class="text-[11px] font-mono tracking-widest uppercase">Scroll to roll the film</span>
+            <div class="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center p-1">
+              <div class="w-1 h-2 bg-[#d4af37] rounded-full animate-bounce"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 01 // MY NEXT CHAPTER
+         ========================================================================= -->
+    <section id="scene-01" class="story-section" data-scene-code="SCENE 01 // MY NEXT CHAPTER">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section1.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-01-crimson"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 01 // Vision & Trajectory
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              My Next Chapter
+            </h2>
+            <p class="section-motto font-serif italic text-base sm:text-lg text-[#d4af37]/90 mt-1 tracking-wide font-normal">
+              Give your own goals a plan.
+            </p>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="compass" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">START HERE • STRATEGIC HORIZON</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                The next definitive step in your directorial journey.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                <strong>My Next Chapter</strong> is your career's strategic anchor: evaluate where you stand as a filmmaker, clarify the artistic stakes of your next film, and transform latent ideas into viable production momentum.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Clarity on project maturity & creative readiness.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Strategic festival and international market alignment.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">STATUS</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">01 ACTIVE</span>
+              </div>
+            <p class="font-serif italic text-xs text-emerald-100">
+              “Why this film? Why now? And why are you the only one who can direct it?”
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 02 // FILM COMPASS
+         ========================================================================= -->
+    <section id="scene-02" class="story-section" data-scene-code="SCENE 02 // FILM COMPASS">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section2.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-02-carmine"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 02 // Creative Direction
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Film Compass
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="navigation" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">CREATIVE NORTH STAR</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Keep your directorial vision uncompromised.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                In independent filmmaking, budgetary pressures constantly threaten to dilute artistic style. <strong>Film Compass</strong> locks in your 5 immovable aesthetic principles, visual grammar, and thematic north star.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Instant visual alignment for DoP, Production Designer & Sound.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Eliminates hasty compromises under production stress.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">CORE PILLARS</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">02 COMPASS</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; TONE & COLOR PALETTE RULES</li>
+<li class="flex items-center gap-2">&bull; PROTAGONIST MORAL COMPASS</li>
+<li class="flex items-center gap-2">&bull; CAMERA GRAMMAR & LENS VOCABULARY</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 03 // WRITING
+         ========================================================================= -->
+    <section id="scene-03" class="story-section" data-scene-code="SCENE 03 // WRITING">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section3.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-03-terracotta"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 03 // Narrative Workshop
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Writing
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="pen-tool" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">STORY ARCHITECTURE</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                From initial logline to final shooting draft.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Structured screenwriting designed for cinematic pacing and scene economy. Track dramatic beats, character subtext, and production feasibility in real time as your draft evolves.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Scene-by-scene tension and emotional arc analysis.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Instant breakdown into production elements as you write.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">SCRIPT DRAFT</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">03 ITERATION</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; 48 SCENES • 104 PAGES</li>
+<li class="flex items-center gap-2">&bull; TIGHT DIALOGUE & PACING</li>
+<li class="flex items-center gap-2">&bull; AUTOMATIC ELEMENT TAGGING</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 04 // FILM LIBRARY
+         ========================================================================= -->
+    <section id="scene-04" class="story-section" data-scene-code="SCENE 04 // FILM LIBRARY">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section4.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-04-amber"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 04 // Creative Archive
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Film Library & Brief
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="film" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">VISUAL DOSSIER & LOOKBOOK</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Your complete artistic vision in one unified deck.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Curate visual moodboards, lighting references, character bibles, and director’s statements into a living brief that inspires department heads and convinces financiers.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>High-resolution visual reference and lookbook builder.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Shareable director's statements with encrypted access control.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">ARCHIVE ASSETS</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">04 VAULT</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; 35MM REFERENCE STILLS</li>
+<li class="flex items-center gap-2">&bull; COLOR PALETTE SWATCHES</li>
+<li class="flex items-center gap-2">&bull; SOUND DESIGN REFERENCES</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 05 // MONEY & FUNDING
+         ========================================================================= -->
+    <section id="scene-05" class="story-section" data-scene-code="SCENE 05 // MONEY & FUNDING">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section5.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-05-ochre"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 05 // Financial Strategy
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Money & Funding
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="coins" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">FINANCIAL ARCHITECTURE</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Realistic funding strategies built for independent cinema.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Map out public grants, co-production funds, tax credits, private equity, and pre-sales. Structure transparent financing waterfalls that protect your creative control and backend ownership.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Multi-tier budget modeling: Low, Target, and Stretch scenarios.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Co-production points, equity waterfalls, and recoupment tiers.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">CAPITAL STACK</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">05 FUNDING</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; SOFT MONEY & PUBLIC GRANTS</li>
+<li class="flex items-center gap-2">&bull; REGIONAL TAX REBATE OPTIMIZER</li>
+<li class="flex items-center gap-2">&bull; EQUITY RECOUPMENT WATERFALL</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 06 // REHEARSALS
+         ========================================================================= -->
+    <section id="scene-06" class="story-section" data-scene-code="SCENE 06 // REHEARSALS">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section6.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-06-brass"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 06 // Grant Defense
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Application Rehearsals
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="mic" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">PITCH SIMULATION LAB</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Stress-test your application before jury submission.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Simulate demanding grant commission grilling, festival lab questions, and co-production markets. Detect narrative gaps and budget inconsistencies before evaluators do.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Simulated jury questions calibrated against real funding rubrics.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Automatic cross-checking between budget realism and artistic scope.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">EVALUATION</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">06 READINESS</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; PITCH CLARITY SCORE: 98%</li>
+<li class="flex items-center gap-2">&bull; BUDGET-TO-VISION COHERENCE</li>
+<li class="flex items-center gap-2">&bull; JURY DEFENSE SIMULATION</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 07 // TODAY & WEEK
+         ========================================================================= -->
+    <section id="scene-07" class="story-section" data-scene-code="SCENE 07 // TODAY & WEEK">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section7.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-07-forest"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 07 // Production Rhythm
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Today & Week
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">SET CADENCE & FOCUS</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Maintain momentum through the chaos of production.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Daily prioritized focus and weekly milestones tailored specifically to film shooting cycles. Eliminate burnout and keep heads of department perfectly synchronized with the director's call.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Time-blocked shooting prep and critical path task tracking.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Synchronized department milestones from casting to wrap.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">TIMELINE</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">07 CADENCE</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; PRE-PRODUCTION: DAY 12/28</li>
+<li class="flex items-center gap-2">&bull; 14 DAYS TO FIRST CLAPPER</li>
+<li class="flex items-center gap-2">&bull; CASTING & LOCATION LOCKED</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 08 // PITCH
+         ========================================================================= -->
+    <section id="scene-08" class="story-section" data-scene-code="SCENE 08 // PITCH">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section8.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-08-emerald"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 08 // Executive Pitch
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Pitch
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="presentation" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">PRESENTATION DECK ENGINE</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Present your project with cinematic conviction.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Generate interactive, visually stunning pitch decks that captivate producers and sales agents. Showcase your hook, comparative titles, cast wishlist, and budget return potential with undeniable authority.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Cinematic full-bleed slides with integrated teaser reels.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Investor engagement metrics and real-time viewing analytics.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">MARKET READINESS</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">08 PITCH</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; CANNES MARCHÉ / EFM FORMAT</li>
+<li class="flex items-center gap-2">&bull; COMPARATIVE BOX OFFICE MODEL</li>
+<li class="flex items-center gap-2">&bull; INTERACTIVE LOOKBOOK ACCESS</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 09 // OBSERVATIONS
+         ========================================================================= -->
+    <section id="scene-09" class="story-section" data-scene-code="SCENE 09 // OBSERVATIONS">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section9.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-09-sage"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 09 // Field Notes
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              In-platform Observations
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">ACTIVE PRODUCTION INTELLIGENCE</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Empirical workflow insights from active directors.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Real-world intelligence collected across active indie productions. Learn how directors and line producers optimize shoot schedules, prevent overtime penalties, and preserve camera time.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Aggregated benchmarks across 120+ independent productions.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Real-time schedule compression tips to protect creative coverage.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">TELEMETRY</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">09 FIELD DATA</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; AVG. TIME SAVED: 14H / WEEK</li>
+<li class="flex items-center gap-2">&bull; ZERO SCRIPT DISCREPANCIES</li>
+<li class="flex items-center gap-2">&bull; CREW ALIGNMENT ACCURACY</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 10 // CANDID REPORT
+         ========================================================================= -->
+    <section id="scene-10" class="story-section" data-scene-code="SCENE 10 // CANDID REPORT">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section10.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-10-teal"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 10 // Reality Check
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              The Candid Report
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">UNFILTERED PROJECT AUDIT</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                An honest diagnosis of project feasibility and risks.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                No industry platitudes. The Candid Report delivers an objective analysis of your script page count, location complexity, crew ratios, and festival release windows to safeguard your investment.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Pinpoints hidden production bottlenecks and schedule vulnerabilities.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Provides actionable pivot strategies before capital is spent.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">DIAGNOSTIC</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">10 AUDIT</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; PRODUCTION RISK: LOW</li>
+<li class="flex items-center gap-2">&bull; TIMELINE VIABILITY: 94%</li>
+<li class="flex items-center gap-2">&bull; BUDGET TOLERANCE: OPTIMAL</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 11 // FIELD TESTED
+         ========================================================================= -->
+    <section id="scene-11" class="story-section" data-scene-code="SCENE 11 // FIELD TESTED">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section11.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-11-cyan"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 11 // Production Validation
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              What Was Tested
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">PROVEN ON ACTIVE SETS</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Tested under demanding production conditions.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Built and refined directly on active sets alongside independent directors, assistant directors, and line producers across feature films, festival shorts, and micro-budget productions.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Stress-tested during grueling 12-hour shooting days.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Full offline functionality validated on remote wilderness locations.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">TRACK RECORD</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">11 TESTED</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; 14 COMPLETED FEATURES</li>
+<li class="flex items-center gap-2">&bull; 32 FESTIVAL SHORT FILMS</li>
+<li class="flex items-center gap-2">&bull; 6 MAJOR FESTIVAL PREMIERES</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 12 // IMPROVEMENTS
+         ========================================================================= -->
+    <section id="scene-12" class="story-section" data-scene-code="SCENE 12 // IMPROVEMENTS">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section12.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-12-indigo"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 12 // Continuous Iteration
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              What We Improved
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">STREAMLINED ARCHITECTURE</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Refined through hundreds of hours of director feedback.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                We eliminated generic project management fluff. What remains is a razor-sharp, distraction-free environment dedicated purely to the craftsmanship of cinematic storytelling.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Instant call sheets with live weather radar and continuity notes.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Zero-latency media playback and synchronized script revisions.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">RELEASE V2.4</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">12 ITERATION</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; 60% FASTER NAVIGATION</li>
+<li class="flex items-center gap-2">&bull; MINIMAL DARKROOM UI</li>
+<li class="flex items-center gap-2">&bull; 1-CLICK CALL SHEET EXPORT</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 13 // ACCEPTANCE CHECKS
+         ========================================================================= -->
+    <section id="scene-13" class="story-section" data-scene-code="SCENE 13 // ACCEPTANCE CHECKS">
+      <div class="photo-frame">
+        <!-- Physical Frame Splice Line & Light Leak Burst -->
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/section13.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask -->
+        <div class="section-scrim scrim-13-platinum"></div>
+
+        <!-- Lower-Third Cinematic HUD Layout -->
+        <div class="story-pinned z-20 w-full max-w-5xl px-4 sm:px-8 mx-auto flex flex-col justify-end pb-8 sm:pb-12 h-full">
+          <div class="mb-3">
+            <div class="section-badge font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] mb-1">
+              Ch. 13 // Final Deliverables
+            </div>
+            <h2 class="section-title font-serif text-3xl sm:text-5xl font-bold text-white">
+              Acceptance Checks
+            </h2>
+          </div>
+
+          <div class="feature-card film-card w-full p-5 sm:p-7 rounded-2xl grid md:grid-cols-12 gap-5 items-center">
+            <div class="md:col-span-8 space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#0d231a]/10 rounded-full text-[11px] font-mono text-[#0d231a]">
+                <i data-lucide="badge-check" class="w-3.5 h-3.5 text-[#0d231a]"></i>
+                <span class="font-semibold">DELIVERY QUALITY GATES</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#0d231a] leading-snug">
+                Mastering compliance from rough cut to final DCP.
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1b3829] leading-relaxed">
+                Automated delivery checklists for festival compliance, audio loudness standards (EBU R128), color space conversions (DCI-P3 / Rec.709), and legal distribution clearances.
+              </p>
+              <div class="grid sm:grid-cols-2 gap-2 text-xs text-[#132c21]">
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>DCP and ProRes mastering compliance pre-flight verification.</span>
+              </div>
+              <div class="flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-800 shrink-0"></i>
+                <span>Automated music cue sheets and chain-of-title rights tracking.</span>
+              </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-4 bg-[#0d231a] text-white p-5 rounded-xl space-y-2 border border-white/10 shadow-lg">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <span class="text-[10px] font-mono text-[#9bb098]">DELIVERABLES</span>
+                <span class="text-[10px] font-mono text-[#d4af37]">13 MASTER</span>
+              </div>
+            <ul class="space-y-1.5 text-[11px] text-gray-300 font-mono">
+              <li class="flex items-center gap-2">&bull; DCI-P3 COLOR VERIFIED</li>
+<li class="flex items-center gap-2">&bull; EBU R128 AUDIO COMPLIANT</li>
+<li class="flex items-center gap-2">&bull; 100% CLEARANCES LOCKED</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         SCENE 14 // GRAND FINALE (CLIMAX UNDER PURE RADIANT WHITE ILLUMINATION)
+         ========================================================================= -->
+    <section id="scene-14" class="story-section" data-scene-code="SCENE 14 // GRAND FINALE">
+      <div class="photo-frame">
+        <div class="frame-splice-line"></div>
+        <div class="splice-light-leak"></div>
+        <video class="video-backdrop" loop muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+          <source src="videos/sample.mp4" type="video/mp4" />
+        </video>
+        <!-- Chromatic Mask: Pure Radiant White -->
+        <div class="section-scrim scrim-14-radiant-white"></div>
+
+        <div class="story-pinned z-20 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto h-full">
+          <div class="climax-title mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#07150e]/10 rounded-full text-xs font-mono text-[#07150e] mb-4">
+              <i data-lucide="clapperboard" class="w-4 h-4 text-[#07150e]"></i>
+              <span class="font-bold tracking-widest uppercase">Ch. 14 // Grand Finale</span>
+            </div>
+            <h2 class="font-serif text-6xl sm:text-8xl md:text-9xl font-bold tracking-tight text-[#07150e] leading-none">
+              if<span class="text-[#d4af37]">.</span>
+            </h2>
+            <p class="font-serif italic text-2xl sm:text-3xl text-[#132c21] mt-3 font-medium">
+              The Independent Filmmaker OS
+            </p>
+          </div>
+
+          <div class="max-w-2xl mx-auto mb-8 space-y-3">
+            <p class="text-sm font-mono uppercase tracking-[0.28em] text-[#0d231a] font-bold">
+              A place for the film.
+            </p>
+            <p class="text-base sm:text-lg text-[#1a3828] font-normal leading-relaxed">
+              No more fragmented spreadsheets, lost emails, or chaotic folder trees. if. is the singular, dedicated creative ecosystem where every decision serves the film.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
+               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase">
+              <span>GET EARLY ACCESS</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border-2 border-[#07150e] text-[#07150e] hover:bg-[#07150e] hover:text-white transition text-sm font-mono tracking-wider uppercase font-semibold">
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>EXPLORE PLATFORM</span>
+            </a>
+          </div>
+
+          <div class="mt-12 text-[11px] font-mono text-[#132c21]/70 tracking-widest uppercase">
+            if. The Independent Filmmaker OS &bull; A place for the film &bull; All rights reserved.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Local Custom Scrollytelling Engine -->
+  <script src="assets/js/main.js?v=195800"></script>
+
+  <script>
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
