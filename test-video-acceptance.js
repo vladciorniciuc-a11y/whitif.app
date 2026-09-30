@@ -88,19 +88,23 @@ assert(js.includes("goToScene(currentSceneIndex + 1)"), '23. Scroll directly adv
 // 11. Hero Scroll Indicator Click Handler
 assert(js.includes("heroScrollIndicator.addEventListener('click', () => {") && js.includes("goToScene(1);"), '24. Hero scroll indicator clicks directly to Scene 01');
 
-// 12. Quick Navigation Dock & English Tooltips
+// 12. Quick Navigation Dock & English Tooltips (3 Buttons: Projector, Step-Back, Clapperboard)
 assert(html.includes('id="roadmapQuickNav"'), '25. Quick Navigation Dock (#roadmapQuickNav) present in HTML');
-assert(html.includes('id="btnPrevScene"'), '26. 1-Arrow Down Button (#btnPrevScene) present in HTML');
-assert(html.includes('id="btnPrologueDirect"'), '27. 2-Arrows Down Button (#btnPrologueDirect) present in HTML');
-assert(html.includes('data-lucide="step-back"'), '28. Button 1 uses "step-back" icon (⏮ cu bara)');
-assert(html.includes('data-lucide="clapperboard"'), '29. Button 2 uses "clapperboard" icon (🎬 clacheta)');
-assert(html.includes('title="Previous Chapter"') && html.includes('>Previous Chapter<'), '30. Button 1 has English tooltip: "Previous Chapter"');
-assert(html.includes('title="Return to Prologue"') && html.includes('>Return to Prologue<'), '31. Button 2 has English tooltip: "Return to Prologue"');
+assert(html.includes('id="btnSpotlightDirect"'), '26. Top Button (#btnSpotlightDirect) present in HTML');
+assert(html.includes('id="btnPrevScene"'), '27. Middle Button (#btnPrevScene) present in HTML');
+assert(html.includes('id="btnPrologueDirect"'), '28. Bottom Button (#btnPrologueDirect) present in HTML');
+assert(html.includes('data-lucide="projector"'), '29. Button 1 uses "projector" icon (📽 proiector spotlight)');
+assert(html.includes('data-lucide="step-back"'), '30. Button 2 uses "step-back" icon (⏮ cu bara)');
+assert(html.includes('data-lucide="clapperboard"'), '31. Button 3 uses "clapperboard" icon (🎬 clacheta)');
+assert(html.includes('title="Spotlight Finale"') && html.includes('>Spotlight Finale<'), '32. Button 1 has English tooltip: "Spotlight Finale"');
+assert(html.includes('title="Previous Chapter"') && html.includes('>Previous Chapter<'), '33. Button 2 has English tooltip: "Previous Chapter"');
+assert(html.includes('title="Return to Prologue"') && html.includes('>Return to Prologue<'), '34. Button 3 has English tooltip: "Return to Prologue"');
 
 // 13. Quick Navigation Functionality
-assert(js.includes('goToScene(currentSceneIndex - 1);'), '32. Button 1 (1 arrow down) navigates to previous scene');
-assert(js.includes('btnPrologueDirect.addEventListener') && js.includes('goToScene(0);'), '33. Button 2 (2 arrows down) navigates directly to Prologue (Scene 00)');
-assert(css.includes('.roadmap-circle-btn') && css.includes('.roadmap-quick-dock'), '34. Circular button dark glass and gold CSS styles defined');
+assert(js.includes('btnSpotlightDirect.addEventListener') && js.includes('goToScene(totalSections - 1);'), '35. Button 1 (projector) navigates directly to Spotlight Finale (Scene 14)');
+assert(js.includes('goToScene(currentSceneIndex - 1);'), '36. Button 2 (step back) navigates to previous scene');
+assert(js.includes('btnPrologueDirect.addEventListener') && js.includes('goToScene(0);'), '37. Button 3 (clapperboard) navigates directly to Prologue (Scene 00)');
+assert(css.includes('.roadmap-circle-btn') && css.includes('.roadmap-quick-dock'), '38. Circular button dark glass and gold CSS styles defined');
 
 // 14. Header Logo Reload on Click
 assert(html.includes('id="headerBrandLogo"'), '33. Header logo element has #headerBrandLogo id');

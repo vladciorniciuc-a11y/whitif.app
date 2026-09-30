@@ -620,7 +620,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Quick Chapter Navigation Click Handlers (1 Arrow Down = Prev Scene, 2 Arrows Down = Direct to Prologue)
+  // Quick Chapter Navigation Click Handlers:
+  // Button 1 (Projector): Direct jump to Spotlight Finale (Scene 14)
+  // Button 2 (Step Back): 1 step backward (Previous Scene)
+  // Button 3 (Clapperboard): Direct jump to Prologue (Scene 00)
+  const btnSpotlightDirect = document.getElementById('btnSpotlightDirect');
+  if (btnSpotlightDirect) {
+    btnSpotlightDirect.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToScene(totalSections - 1);
+    });
+  }
+
   const btnPrevScene = document.getElementById('btnPrevScene');
   if (btnPrevScene) {
     btnPrevScene.addEventListener('click', (e) => {
