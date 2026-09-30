@@ -314,19 +314,30 @@ body.epoch-digital .margin-rail {
 .scrim-12-indigo { background: radial-gradient(circle at center, rgba(20, 24, 58, 0.45) 0%, rgba(10, 12, 30, 0.92) 85%); }
 .scrim-13-platinum { background: radial-gradient(circle at center, rgba(35, 45, 55, 0.35) 0%, rgba(18, 24, 30, 0.88) 85%); }
 
-/* 14: PURE RADIANT WHITE CLIMAX */
+/* 14: PURE RADIANT WHITE CLIMAX (TRANSLUCENT ILLUMINATION TO REVEAL FILM) */
 .scrim-14-radiant-white {
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(245, 248, 242, 0.98) 75%, #ffffff 100%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35) 0%, rgba(245, 248, 242, 0.55) 70%, rgba(255, 255, 255, 0.72) 100%);
 }
 
-.scrim-14-radiant-white ~ .story-pinned .climax-title h2 { color: #07150e !important; }
-.scrim-14-radiant-white ~ .story-pinned .climax-title p { color: #4a5649 !important; }
+.scrim-14-radiant-white ~ .story-pinned .climax-title h2 { 
+  color: #07150e !important; 
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.9), 0 0 45px rgba(255, 255, 255, 0.95);
+}
+.scrim-14-radiant-white ~ .story-pinned .climax-title p { 
+  color: #1a2e24 !important; 
+  text-shadow: 0 1px 16px rgba(255, 255, 255, 0.85);
+}
 .scrim-14-radiant-white ~ .story-pinned .climax-card { color: #1a3828 !important; }
 
 #scene-14 .photo-frame {
-  background-color: #ffffff;
+  background-color: #050c08;
   border-color: rgba(13, 35, 26, 0.4);
-  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35), 0 0 100px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35), 0 0 100px rgba(255, 255, 255, 0.5);
+}
+
+#scene-14 .video-backdrop {
+  opacity: 0.88;
+  filter: contrast(1.15) brightness(1.02);
 }
 
 #scene-14 .story-pinned {
