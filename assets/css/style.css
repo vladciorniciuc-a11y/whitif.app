@@ -320,7 +320,7 @@ body.epoch-digital .margin-rail {
 }
 
 .scrim-14-radiant-white ~ .story-pinned .climax-title h2 { color: #07150e !important; }
-.scrim-14-radiant-white ~ .story-pinned .climax-title p { color: #132c21 !important; }
+.scrim-14-radiant-white ~ .story-pinned .climax-title p { color: #4a5649 !important; }
 .scrim-14-radiant-white ~ .story-pinned .climax-card { color: #1a3828 !important; }
 
 #scene-14 .photo-frame {
@@ -534,6 +534,25 @@ body.epoch-digital .margin-rail {
   z-index: 10;
   pointer-events: auto;
   white-space: nowrap;
+}
+
+.hud-logo-if {
+  color: #ffffff;
+  transition: color 0.4s ease;
+}
+
+.hud-logo-tagline {
+  color: #9bb098;
+  transition: color 0.4s ease;
+}
+
+/* Scene 14 Spotlight Finale: ONLY in this section, if. is black and tagline is darker shade of gray */
+body.scene-climax-active .hud-brand-center .hud-logo-if {
+  color: #07150e !important;
+}
+
+body.scene-climax-active .hud-brand-center .hud-logo-tagline {
+  color: #4a5649 !important;
 }
 
 .rec-badge {

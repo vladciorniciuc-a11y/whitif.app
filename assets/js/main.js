@@ -206,13 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 120);
 
   function updateEpochMargins(sceneIndex) {
-    document.body.classList.remove('epoch-analog', 'epoch-hybrid', 'epoch-digital');
+    document.body.classList.remove('epoch-analog', 'epoch-hybrid', 'epoch-digital', 'scene-climax-active');
     if (sceneIndex <= 4) {
       document.body.classList.add('epoch-analog');
     } else if (sceneIndex <= 9) {
       document.body.classList.add('epoch-hybrid');
     } else {
       document.body.classList.add('epoch-digital');
+    }
+
+    // Scene 14 Spotlight Finale: activates specific theme styles (black logo, darker gray tagline)
+    if (sceneIndex === totalSections - 1) {
+      document.body.classList.add('scene-climax-active');
     }
   }
 
@@ -399,11 +404,15 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     gsap.fromTo('.hero-tagline', 
       { opacity: 0, y: 20 }, 
-      { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 0.6 }
+      { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out', delay: 0.55 }
+    );
+    gsap.fromTo('.hero-ctas', 
+      { opacity: 0, y: 15 }, 
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.8 }
     );
     gsap.fromTo('.hero-scroll-indicator', 
       { opacity: 0, y: 15 }, 
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.0 }
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.05 }
     );
   }
 
@@ -627,6 +636,15 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPrologueDirect.addEventListener('click', (e) => {
       e.stopPropagation();
       goToScene(0);
+    });
+  }
+
+  // Header Brand Logo Click Handler (Reload page instead of opening online URL)
+  const headerBrandLogo = document.getElementById('headerBrandLogo');
+  if (headerBrandLogo) {
+    headerBrandLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.reload();
     });
   }
 

@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=196000" />
+  <link rel="stylesheet" href="assets/css/style.css?v=196100" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -122,9 +122,9 @@
     </div>
 
     <!-- Center Brand mark (Dead-center on the middle of the page) -->
-    <a href="https://withif.app/" class="hud-brand-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-auto hover:opacity-80 transition z-10 whitespace-nowrap">
-      <span class="font-serif font-bold text-lg text-white">if.</span>
-      <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-[#9bb098] uppercase">The Independent Filmmaker OS</span>
+    <a href="#" id="headerBrandLogo" class="hud-brand-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-auto hover:opacity-80 transition z-10 whitespace-nowrap" title="Reload page" aria-label="Reload page">
+      <span class="hud-logo-if font-serif font-bold text-lg text-white">if.</span>
+      <span class="hud-logo-tagline hidden sm:inline font-mono text-[10px] tracking-widest text-[#9bb098] uppercase">The Independent Filmmaker OS</span>
     </a>
 
     <!-- Right HUD Info & Direct Login CTA -->
@@ -261,13 +261,27 @@
             </p>
           </div>
 
-          <div class="hero-tagline max-w-xl mx-auto mb-10">
+          <div class="hero-tagline max-w-xl mx-auto mb-6">
             <p class="text-xs sm:text-sm font-mono uppercase tracking-[0.25em] text-[#9bb098] mb-3">
               A place for the film.
             </p>
             <p class="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
               From the first spark of the screenplay to the spotlights of the premiere. A unified operating system crafted exclusively for independent cinema.
             </p>
+          </div>
+
+          <!-- CTAs matching Spotlight Finale -->
+          <div class="hero-ctas flex flex-wrap items-center justify-center gap-4 mb-8">
+            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
+               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase">
+              <span>GET EARLY ACCESS</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border-2 border-white/40 text-white hover:bg-white hover:text-[#07150e] hover:border-white transition text-sm font-mono tracking-wider uppercase font-semibold backdrop-blur-sm">
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>EXPLORE PLATFORM</span>
+            </a>
           </div>
 
           <div class="hero-scroll-indicator flex flex-col items-center gap-3 text-white/60 cursor-pointer">
@@ -1134,7 +1148,7 @@
             <h2 class="font-serif text-6xl sm:text-8xl md:text-9xl font-bold tracking-tight text-[#07150e] leading-none">
               if<span class="text-[#d4af37]">.</span>
             </h2>
-            <p class="font-serif italic text-2xl sm:text-3xl text-[#132c21] mt-3 font-medium">
+            <p class="font-serif italic text-2xl sm:text-3xl text-[#4a5649] mt-3 font-medium">
               The Independent Filmmaker OS
             </p>
           </div>
@@ -1170,7 +1184,7 @@
   </main>
 
   <!-- Local Custom Scrollytelling Engine -->
-  <script src="assets/js/main.js?v=196000"></script>
+  <script src="assets/js/main.js?v=196100"></script>
 
   <script>
     if (typeof lucide !== 'undefined') {

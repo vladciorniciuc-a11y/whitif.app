@@ -100,6 +100,26 @@ assert(js.includes('goToScene(currentSceneIndex - 1);'), '30. Button 1 (1 arrow 
 assert(js.includes('btnPrologueDirect.addEventListener') && js.includes('goToScene(0);'), '31. Button 2 (2 arrows down) navigates directly to Prologue (Scene 00)');
 assert(css.includes('.roadmap-circle-btn') && css.includes('.roadmap-quick-dock'), '32. Circular button dark glass and gold CSS styles defined');
 
+// 14. Header Logo Reload on Click
+assert(html.includes('id="headerBrandLogo"'), '33. Header logo element has #headerBrandLogo id');
+assert(js.includes('headerBrandLogo.addEventListener') && js.includes('window.location.reload()'), '34. Clicking header logo reloads the page (instead of navigating away)');
+
+// 15. Scene 14 Spotlight Finale Specific Logo Colors
+assert(css.includes('body.scene-climax-active .hud-brand-center .hud-logo-if') && css.includes('#07150e'), '35. Scene 14 sets logo "if." to black in Spotlight Finale');
+assert(css.includes('body.scene-climax-active .hud-brand-center .hud-logo-tagline') && css.includes('#4a5649'), '36. Scene 14 sets tagline to darker shade of gray in Spotlight Finale');
+assert(js.includes("document.body.classList.add('scene-climax-active');"), '37. JavaScript toggles scene-climax-active exclusively on Scene 14');
+
+// 16. Spotlight CTAs present in both Prologue (Scene 00) and Spotlight Finale (Scene 14)
+const scene00Html = html.split('<section id="scene-00"')[1]?.split('</section>')[0] || '';
+const scene00HasAccessCTA = scene00Html.includes('GET EARLY ACCESS');
+const scene00HasExploreCTA = scene00Html.includes('EXPLORE PLATFORM');
+assert(scene00HasAccessCTA && scene00HasExploreCTA, '38. Spotlight CTAs ("GET EARLY ACCESS" & "EXPLORE PLATFORM") are present in Prologue (Scene 00)');
+
+const scene14Html = html.split('<section id="scene-14"')[1]?.split('</section>')[0] || '';
+const scene14HasAccessCTA = scene14Html.includes('GET EARLY ACCESS');
+const scene14HasExploreCTA = scene14Html.includes('EXPLORE PLATFORM');
+assert(scene14HasAccessCTA && scene14HasExploreCTA, '39. Spotlight CTAs ("GET EARLY ACCESS" & "EXPLORE PLATFORM") are present in Spotlight Finale (Scene 14)');
+
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
 console.log(`PASSED: ${passCount}`);
