@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=195900" />
+  <link rel="stylesheet" href="assets/css/style.css?v=196000" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -112,7 +112,7 @@
         <i data-lucide="timer" class="w-3.5 h-3.5"></i>
         <span id="hudTimecode">00:00:00:00</span>
       </div>
-      <div class="hidden md:flex items-center gap-3 text-white/50 text-[10px]">
+      <div class="hidden xl:flex items-center gap-3 text-white/50 text-[10px]">
         <span>35MM CELLULOID</span>
         <span>•</span>
         <span>SHUTTER: 180°</span>
@@ -121,8 +121,8 @@
       </div>
     </div>
 
-    <!-- Center Brand mark -->
-    <a href="https://withif.app/" class="flex items-center gap-2 pointer-events-auto hover:opacity-80 transition">
+    <!-- Center Brand mark (Dead-center on the middle of the page) -->
+    <a href="https://withif.app/" class="hud-brand-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-auto hover:opacity-80 transition z-10 whitespace-nowrap">
       <span class="font-serif font-bold text-lg text-white">if.</span>
       <span class="hidden sm:inline font-mono text-[10px] tracking-widest text-[#9bb098] uppercase">The Independent Filmmaker OS</span>
     </a>
@@ -1170,7 +1170,7 @@
   </main>
 
   <!-- Local Custom Scrollytelling Engine -->
-  <script src="assets/js/main.js?v=195900"></script>
+  <script src="assets/js/main.js?v=196000"></script>
 
   <script>
     if (typeof lucide !== 'undefined') {

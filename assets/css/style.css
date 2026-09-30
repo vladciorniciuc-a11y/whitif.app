@@ -187,6 +187,7 @@ body.epoch-digital .margin-rail {
 @media (max-width: 768px) {
   .margin-rail { width: 20px; }
   .film-edge-code, .digital-sensor-code { display: none; }
+  .camera-hud { padding: 10px 24px; }
 }
 
 /* ==========================================================================
@@ -523,6 +524,17 @@ body.epoch-digital .margin-rail {
 }
 .camera-hud-top { top: 12px; }
 .camera-hud-bottom { bottom: 12px; }
+
+/* Centered Brand Mark in Header HUD (Dead-center on the middle of the page) */
+.hud-brand-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: auto;
+  white-space: nowrap;
+}
 
 .rec-badge {
   display: inline-flex;
