@@ -329,6 +329,11 @@ body.epoch-digital .margin-rail {
   box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35), 0 0 100px rgba(255, 255, 255, 0.9);
 }
 
+#scene-14 .story-pinned {
+  padding-top: clamp(4.5rem, 11vh, 7.5rem);
+  padding-bottom: 2.5rem;
+}
+
 /* Volumetric Spotlights (Intro & Outro) */
 .spotlight-container {
   position: absolute;
