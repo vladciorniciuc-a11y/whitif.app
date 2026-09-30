@@ -530,15 +530,21 @@ body.epoch-digital .margin-rail {
 .camera-hud-top { top: 12px; }
 .camera-hud-bottom { bottom: 12px; }
 
-/* Centered Brand Mark in Header HUD (Dead-center on the middle of the page) */
+/* Centered Brand Mark in Header HUD (Dead-center horizontally, 10px below frame splice line) */
 .hud-brand-center {
-  position: absolute;
+  position: fixed;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
+  top: 34px; /* 18px (frame top) + 6px (splice line) + 10px exact gap */
+  transform: translateX(-50%);
+  z-index: 85;
   pointer-events: auto;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hud-brand-center {
+    top: 28px; /* 12px (mobile frame top) + 6px (splice line) + 10px exact gap */
+  }
 }
 
 .hud-logo-if {

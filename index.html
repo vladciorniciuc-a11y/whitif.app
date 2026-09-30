@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=196300" />
+  <link rel="stylesheet" href="assets/css/style.css?v=196400" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -121,8 +121,8 @@
       </div>
     </div>
 
-    <!-- Center Brand mark (Dead-center on the middle of the page) -->
-    <a href="#" id="headerBrandLogo" class="hud-brand-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-auto hover:opacity-80 transition z-10 whitespace-nowrap" title="Reload page" aria-label="Reload page">
+    <!-- Center Brand mark (Dead-center on the middle of the page, 10px below splice line) -->
+    <a href="#" id="headerBrandLogo" class="hud-brand-center fixed left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-auto hover:opacity-80 transition z-50 whitespace-nowrap" title="Reload page" aria-label="Reload page">
       <span class="hud-logo-if font-serif font-bold text-lg text-white">if.</span>
       <span class="hud-logo-tagline hidden sm:inline font-mono text-[10px] tracking-widest text-[#9bb098] uppercase">The Independent Filmmaker OS</span>
     </a>
@@ -1141,7 +1141,7 @@
 
         <div class="story-pinned z-20 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto h-full pt-16 sm:pt-20 md:pt-24 pb-8">
           <div class="climax-title mb-6">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#07150e]/10 rounded-full text-xs font-mono text-[#07150e] mb-4">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#07150e]/10 rounded-full text-xs font-mono text-[#07150e] mb-[10px]">
               <i data-lucide="clapperboard" class="w-4 h-4 text-[#07150e]"></i>
               <span class="font-bold tracking-widest uppercase">Ch. 14 // Grand Finale</span>
             </div>
