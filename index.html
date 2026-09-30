@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=197000" />
+  <link rel="stylesheet" href="assets/css/style.css?v=197100" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -103,21 +103,28 @@
 
   <!-- Top Camera HUD -->
   <header class="camera-hud camera-hud-top flex justify-between items-center z-50">
-    <div class="flex items-center gap-6">
-      <div class="rec-badge">
-        <span class="rec-dot"></span>
-        <span>REC</span>
+    <!-- Left HUD: REC, Timer, Telemetry + Breadcrumbs directly under REC -->
+    <div class="flex flex-col gap-1 items-start">
+      <div class="flex items-center gap-6">
+        <div class="rec-badge">
+          <span class="rec-dot"></span>
+          <span>REC</span>
+        </div>
+        <div class="text-[#38e07b] flex items-center gap-2">
+          <i data-lucide="timer" class="w-3.5 h-3.5"></i>
+          <span id="hudTimecode">00:00:00:00</span>
+        </div>
+        <div class="hidden xl:flex items-center gap-3 text-white/50 text-[10px]">
+          <span>35MM CELLULOID</span>
+          <span>•</span>
+          <span>SHUTTER: 180°</span>
+          <span>•</span>
+          <span>ISO: 800</span>
+        </div>
       </div>
-      <div class="text-[#38e07b] flex items-center gap-2">
-        <i data-lucide="timer" class="w-3.5 h-3.5"></i>
-        <span id="hudTimecode">00:00:00:00</span>
-      </div>
-      <div class="hidden xl:flex items-center gap-3 text-white/50 text-[10px]">
-        <span>35MM CELLULOID</span>
-        <span>•</span>
-        <span>SHUTTER: 180°</span>
-        <span>•</span>
-        <span>ISO: 800</span>
+      <!-- Scene Breadcrumbs (e.g. SCENE 00 // PROLOGUE, SCENE 02 // FILM COMPASS) Aligned Directly Under REC -->
+      <div class="hud-scene-breadcrumbs flex items-center">
+        <span id="hudSceneNumber" class="text-[#d4af37] font-bold text-[11px] font-mono tracking-widest uppercase">SCENE 00 // PROLOGUE</span>
       </div>
     </div>
 
@@ -128,8 +135,7 @@
     </a>
 
     <!-- Right HUD Info & Direct Login CTA -->
-    <div class="flex items-center gap-4">
-      <span id="hudSceneNumber" class="text-[#d4af37] font-bold">SCENE 00</span>
+    <div class="flex items-center">
       <a href="https://withif.app/" target="_blank" rel="noopener noreferrer" 
          class="enter-os-btn pointer-events-auto hidden sm:inline-flex">
         <span>ENTER OS</span>
@@ -159,7 +165,7 @@
     </div>
   </footer>
 
-  <!-- Left Side Director's Roadmap Navigation Bar (Aligned with REC, Ascending: 00 at bottom -> 14 at top) -->
+  <!-- Right Side Director's Roadmap Navigation Bar (Ascending: 00 at bottom -> 14 at top) -->
   <nav class="roadmap-nav hidden lg:flex" aria-label="Roadmap Navigation">
     <div class="roadmap-track">
       <div id="roadmapProgressBar" class="roadmap-progress-fill"></div>
@@ -213,7 +219,7 @@
       <span class="dot-label">14 // Spotlight Finale (Climax)</span>
     </div>
 
-    <!-- Left Side Quick Chapter Navigation Dock (Visible from Scene 01+, docked directly under the roadmap bar) -->
+    <!-- Right Side Quick Chapter Navigation Dock (Visible from Scene 01+, docked directly under the roadmap bar) -->
     <aside id="roadmapQuickNav" class="roadmap-quick-dock opacity-0 pointer-events-none translate-y-3 transition-all duration-500" aria-label="Quick Chapter Navigation">
       <!-- Button 1: Jump to Spotlight Finale (📽 35mm cinema projector in profile) -->
       <button id="btnSpotlightDirect" class="roadmap-circle-btn group" title="Spotlight Finale" aria-label="Spotlight Finale">

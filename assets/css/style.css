@@ -430,7 +430,7 @@ body.epoch-digital .margin-rail {
    ========================================================================= */
 .roadmap-nav {
   position: fixed;
-  left: 69px; /* Aligned with REC badge under REC on the left */
+  right: 64px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 85;
@@ -497,9 +497,9 @@ body.epoch-digital .margin-rail {
 
 .roadmap-dot .dot-label {
   position: absolute;
-  left: 28px;
+  right: 28px;
   top: 50%;
-  transform: translateY(-50%) translateX(-10px);
+  transform: translateY(-50%) translateX(10px);
   opacity: 0;
   pointer-events: none;
   white-space: nowrap;
@@ -575,6 +575,10 @@ body.scene-climax-active .hud-brand-center .hud-logo-if {
 
 body.scene-climax-active .hud-brand-center .hud-logo-tagline {
   color: #4a5649 !important;
+}
+
+body.scene-climax-active #hudSceneNumber {
+  color: #07150e !important;
 }
 
 .rec-badge {
@@ -805,9 +809,9 @@ html.lenis, html.lenis body { height: auto; }
 
 .roadmap-circle-btn .btn-side-tooltip {
   position: absolute;
-  left: calc(100% + 12px);
+  right: calc(100% + 12px);
   top: 50%;
-  transform: translateY(-50%) translateX(-6px);
+  transform: translateY(-50%) translateX(6px);
   background: rgba(7, 21, 14, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -833,7 +837,7 @@ html.lenis, html.lenis body { height: auto; }
 
 @media (max-width: 1024px) {
   .roadmap-quick-dock {
-    left: 18px;
+    right: 18px;
     bottom: 70px;
   }
 }
