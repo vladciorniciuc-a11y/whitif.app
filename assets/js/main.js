@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000 / 24);
   }
 
-  // 3. Resilient Video Preload & Playback Architecture (No Loop + Replay Button Engine)
+  // 3. Resilient Video Preload & Playback Architecture (Autoplay Hero, No Loop on 00-13, Loop on 14)
   const allVideos = document.querySelectorAll('video');
   allVideos.forEach((video) => {
     video.muted = true;
@@ -72,9 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
     video.setAttribute('playsinline', '');
     video.setAttribute('muted', '');
 
-    // Scene 14 (Spotlight Finale Climax) remains in continuous loop; scenes 00-13 stop at last frame
     const parentSection = video.closest('.story-section');
     const isFinale = parentSection && parentSection.id === 'scene-14';
+    const isHero = parentSection && parentSection.id === 'scene-00';
+
+    // Scene 14 (Spotlight Finale Climax) remains in continuous loop; scenes 00-13 stop at last frame (no loop)
     if (isFinale) {
       video.loop = true;
       video.setAttribute('loop', '');
@@ -83,12 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
       video.removeAttribute('loop');
     }
     
+    // Scene 00 (Hero / Prologue): Autoplay enabled without mouse activation
+    if (isHero) {
+      video.autoplay = true;
+      video.setAttribute('autoplay', '');
+      video.play().catch(() => {});
+    }
+
     const fallbackSrc = video.getAttribute('data-fallback') || 'videos/sample.mp4';
     const handleError = () => {
       if (!video.dataset.hasFallenBack) {
         video.dataset.hasFallenBack = "true";
         video.src = fallbackSrc;
         video.load();
+        if (isHero) {
+          video.play().catch(() => {});
+        }
       }
     };
     video.addEventListener('error', handleError, true);
@@ -96,22 +108,23 @@ document.addEventListener('DOMContentLoaded', () => {
     sources.forEach(src => src.addEventListener('error', handleError));
   });
 
-  // Attach Cinematic Replay Buttons to Story Sections (Scenes 00-13 stop at end; Scene 14 Finale loops with no replay button)
+  // Attach Cinematic Replay Buttons ONLY to Scenes 01-13
+  // - Scene 00 (Hero / Prologue): Autoplay, stops at last frame, NO replay button
+  // - Scenes 01-13: Stop at last frame, SHOW replay button
+  // - Scene 14 (Spotlight Finale): Continuous loop, NO replay button
   storySections.forEach((section, index) => {
     const video = section.querySelector('video.video-backdrop');
     if (!video) return;
 
-    // Scene 14 Finale: video stays in loop, NO replay button is created
-    if (index === totalSections - 1) {
-      video.loop = true;
-      video.setAttribute('loop', '');
+    // Skip Scene 00 (Hero) and Scene 14 (Finale) - neither has a replay button
+    if (index === 0 || index === totalSections - 1) {
       return;
     }
 
     // Create replay button element
     const replayBtn = document.createElement('button');
     replayBtn.type = 'button';
-    replayBtn.className = 'video-replay-btn';
+    replayBtn.className = 'video-replay-btn replay-btn-scene-default';
     replayBtn.setAttribute('aria-label', 'Replay Scene Video');
     replayBtn.innerHTML = `
       <span class="video-replay-icon-box">
@@ -121,13 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </span>
       <span class="video-replay-label">REPLAY</span>
     `;
-
-    // Position replay button specifically for Scene 00 vs Scenes 01-13
-    if (index === 0) {
-      replayBtn.classList.add('replay-btn-scene-00');
-    } else {
-      replayBtn.classList.add('replay-btn-scene-default');
-    }
 
     const photoFrame = section.querySelector('.photo-frame') || section;
     photoFrame.appendChild(replayBtn);
@@ -372,7 +378,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let isTransitioning = false;
   let currentSceneIndex = 0;
   let lastWheelTime = 0;
-  let isPrologueFilmStarted = false;
 
   // Sync initial scene index on load
   const initialScroll = window.scrollY || document.documentElement.scrollTop;
@@ -400,42 +405,6 @@ document.addEventListener('DOMContentLoaded', () => {
       { opacity: 0, y: 15 }, 
       { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.0 }
     );
-  }
-
-  let prologueScrollCooldown = 0;
-
-  function startPrologueFilm() {
-    if (isPrologueFilmStarted) return;
-    isPrologueFilmStarted = true;
-    prologueScrollCooldown = Date.now() + 250;
-
-    const prologueVideo = document.querySelector('#scene-00 video');
-    const spliceLeak = document.querySelector('#scene-00 .splice-light-leak');
-
-    // 1. Play Scene 00 1920s Silent Film Noir
-    if (prologueVideo && prologueVideo.paused) {
-      prologueVideo.currentTime = 0;
-      prologueVideo.play().catch(() => {});
-    }
-
-    // 2. Optical light leak burst as projector starts rolling
-    if (spliceLeak) {
-      gsap.fromTo(spliceLeak, 
-        { opacity: 0 }, 
-        { opacity: 0.8, duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }
-      );
-    }
-
-    // 3. Update scroll indicator subtly — HERO TEXT REMAINS 100% VISIBLE THROUGHOUT
-    const indicatorText = document.querySelector('.hero-scroll-indicator span');
-    if (indicatorText) {
-      indicatorText.textContent = 'SCROLL TO EXPLORE';
-    }
-
-    const hudSceneNumber = document.getElementById('hudSceneNumber');
-    if (hudSceneNumber) {
-      hudSceneNumber.textContent = 'SCENE 00 // ROLLING 35MM';
-    }
   }
 
   function goToScene(targetIndex) {
@@ -543,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isTransitioning = false;
   }
 
-  // Mouse Wheel Scroll Listener (Section-by-Section Lock & Prologue 2-Step Roll)
+  // Mouse Wheel Scroll Listener (Section-by-Section Lock)
   window.addEventListener('wheel', (e) => {
     e.preventDefault();
 
@@ -551,16 +520,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (Math.abs(e.deltaY) < 18) return;
 
     if (isTransitioning) return;
-    if (Date.now() < prologueScrollCooldown) return;
 
     lastWheelTime = Date.now();
 
     if (e.deltaY > 0) {
-      // Scene 00: First scroll initiates the 35mm silent film noir video; text stays 100% visible!
-      if (currentSceneIndex === 0 && !isPrologueFilmStarted) {
-        startPrologueFilm();
-        return;
-      }
       if (currentSceneIndex < totalSections - 1) {
         goToScene(currentSceneIndex + 1);
       }
@@ -589,7 +552,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('touchend', (e) => {
     if (isTransitioning) return;
-    if (Date.now() < prologueScrollCooldown) return;
 
     const touchEndY = e.changedTouches[0].clientY;
     const touchEndX = e.changedTouches[0].clientX;
@@ -598,10 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 35) {
       if (deltaY > 0) {
-        if (currentSceneIndex === 0 && !isPrologueFilmStarted) {
-          startPrologueFilm();
-          return;
-        }
         if (currentSceneIndex < totalSections - 1) {
           goToScene(currentSceneIndex + 1);
         }
@@ -616,14 +574,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Keyboard Navigation
   window.addEventListener('keydown', (e) => {
     if (isTransitioning) return;
-    if (Date.now() < prologueScrollCooldown) return;
 
     if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
       e.preventDefault();
-      if (currentSceneIndex === 0 && !isPrologueFilmStarted) {
-        startPrologueFilm();
-        return;
-      }
       if (currentSceneIndex < totalSections - 1) {
         goToScene(currentSceneIndex + 1);
       }
@@ -649,16 +602,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Hero Scroll Indicator Click Handler (Two-Step: Roll Film First, Then Advance)
+  // Hero Scroll Indicator Click Handler (Advance to Scene 01)
   const heroScrollIndicator = document.querySelector('.hero-scroll-indicator');
   if (heroScrollIndicator) {
     heroScrollIndicator.style.cursor = 'pointer';
     heroScrollIndicator.addEventListener('click', () => {
-      if (!isPrologueFilmStarted) {
-        startPrologueFilm();
-      } else {
-        goToScene(1);
-      }
+      goToScene(1);
     });
   }
 

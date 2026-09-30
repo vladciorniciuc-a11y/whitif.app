@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=195800" />
+  <link rel="stylesheet" href="assets/css/style.css?v=195900" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -218,14 +218,14 @@
   <!-- Right Side Quick Chapter Navigation Dock (Visible from Scene 01+) -->
   <aside id="roadmapQuickNav" class="roadmap-quick-dock opacity-0 pointer-events-none translate-y-3 transition-all duration-500" aria-label="Quick Chapter Navigation">
     <!-- Button 1: Previous Chapter (1 Arrow Down) -->
-    <button id="btnPrevScene" class="roadmap-circle-btn group" title="Capitolul precedent" aria-label="Previous Chapter">
+    <button id="btnPrevScene" class="roadmap-circle-btn group" title="Previous Chapter" aria-label="Previous Chapter">
       <i data-lucide="chevron-down" class="w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:translate-y-0.5"></i>
-      <span class="btn-side-tooltip">Capitolul precedent</span>
+      <span class="btn-side-tooltip">Previous Chapter</span>
     </button>
     <!-- Button 2: Direct to Prologue at the base of roadmap (2 Arrows Down) -->
-    <button id="btnPrologueDirect" class="roadmap-circle-btn group" title="Înapoi la Prologue" aria-label="Return to Prologue">
+    <button id="btnPrologueDirect" class="roadmap-circle-btn group" title="Return to Prologue" aria-label="Return to Prologue">
       <i data-lucide="chevrons-down" class="w-4 h-4 text-[#d4af37] group-hover:text-[#07150e] transition-transform duration-200 group-hover:translate-y-0.5"></i>
-      <span class="btn-side-tooltip">Înapoi la Prologue</span>
+      <span class="btn-side-tooltip">Return to Prologue</span>
     </button>
   </aside>
 
@@ -238,7 +238,7 @@
       <div class="photo-frame">
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" autoplay muted playsinline preload="auto" data-fallback="videos/sample.mp4">
           <source src="videos/sample.mp4?v=172247" type="video/mp4" />
         </video>
         <!-- Chromatic Mask: Noir Absolute -->
@@ -271,7 +271,7 @@
           </div>
 
           <div class="hero-scroll-indicator flex flex-col items-center gap-3 text-white/60 cursor-pointer">
-            <span class="text-[11px] font-mono tracking-widest uppercase">Scroll to roll the film</span>
+            <span class="text-[11px] font-mono tracking-widest uppercase">Scroll to explore</span>
             <div class="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center p-1">
               <div class="w-1 h-2 bg-[#d4af37] rounded-full animate-bounce"></div>
             </div>
@@ -1170,7 +1170,7 @@
   </main>
 
   <!-- Local Custom Scrollytelling Engine -->
-  <script src="assets/js/main.js?v=195800"></script>
+  <script src="assets/js/main.js?v=195900"></script>
 
   <script>
     if (typeof lucide !== 'undefined') {
