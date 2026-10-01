@@ -127,7 +127,7 @@ const scene14HasExploreCTA = scene14Html.includes('EXPLORE PLATFORM');
 assert(scene14HasAccessCTA && scene14HasExploreCTA, '39. Spotlight CTAs ("GET EARLY ACCESS" & "EXPLORE PLATFORM") are present in Spotlight Finale (Scene 14)');
 
 // 17. Footer Center Alignment with Header Logo & Spotlight Finale Black Color Adaptation
-assert(html.includes('hud-footer-center') && html.includes('left-1/2 -translate-x-1/2') && html.includes('2026 if.') && html.includes('id="btnPrivacyPolicy"'), '40. Footer center (2026 if. • [ PRIVACY POLICY ]) is dead-center aligned with header logo');
+assert(html.includes('hud-footer-center') && html.includes('left-1/2 -translate-x-1/2') && html.includes('2026 if.') && html.includes('btnOpenPrivacyModalFooter'), '40. Footer center (2026 if.) is dead-center aligned with header logo; legal modals accessible via Scene 14 footer');
 assert(css.includes('body.scene-climax-active .hud-footer-center .hud-footer-copy') && css.includes('#07150e'), '41. Scene 14 Spotlight Finale turns "2026 if." to black (#07150e) exclusively in spotlight section');
 
 // 18. Intermission / Commercial Break Section & BYOK Privacy Architecture
