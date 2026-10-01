@@ -452,6 +452,60 @@ body.epoch-digital .margin-rail {
   transform: translateY(3px);
 }
 
+/* 35mm Filmstrip Scroll Indicator */
+.filmstrip-scroll-icon {
+  width: 22px;
+  height: 36px;
+  display: block;
+  overflow: visible;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-scroll-indicator:hover .filmstrip-scroll-icon {
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+}
+
+.filmstrip-gate {
+  transition: stroke 0.3s ease, stroke-opacity 0.3s ease, fill-opacity 0.3s ease;
+}
+
+.hero-scroll-indicator:hover .filmstrip-gate {
+  stroke: #d4af37;
+  stroke-opacity: 0.9;
+  fill-opacity: 0.95;
+}
+
+.hero-scroll-indicator:hover .film-sprocket {
+  fill: #d4af37;
+  fill-opacity: 0.5;
+}
+
+.hero-scroll-indicator:hover .film-frame {
+  stroke-opacity: 0.85;
+  fill-opacity: 0.16;
+}
+
+.film-roll-track {
+  animation: filmRollMove 1.4s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes filmRollMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-roll-track {
+    animation: none;
+  }
+}
+
+
 /* ==========================================================================
    ROADMAP NAVIGATION BAR (00 AT BOTTOM -> 14 AT TOP)
    ========================================================================= */
