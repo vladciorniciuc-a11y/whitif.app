@@ -207,16 +207,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateEpochMargins(sceneIndex) {
     document.body.classList.remove('epoch-analog', 'epoch-hybrid', 'epoch-digital', 'scene-climax-active');
-    if (sceneIndex <= 4) {
+    if (sceneIndex <= 5) {
       document.body.classList.add('epoch-analog');
-    } else if (sceneIndex <= 9) {
+    } else if (sceneIndex <= 10) {
       document.body.classList.add('epoch-hybrid');
     } else {
       document.body.classList.add('epoch-digital');
     }
 
-    // Scene 14 Spotlight Finale: activates specific theme styles (black logo, darker gray tagline)
-    if (sceneIndex === totalSections - 1) {
+    // White background sections (Commercial Break & Spotlight Finale): activates specific theme styles (black logo, dark HUD)
+    const activeSection = storySections[sceneIndex];
+    if (sceneIndex === totalSections - 1 || (activeSection && activeSection.classList.contains('light-theme-section'))) {
       document.body.classList.add('scene-climax-active');
     }
   }
@@ -914,9 +915,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 13. AUDIT & DATA DISCLOSURE MODAL
+  const auditModal = document.getElementById('auditModal');
+  const btnOpenAuditModal = document.getElementById('btnOpenAuditModal');
+  const btnOpenAuditModalSide = document.getElementById('btnOpenAuditModalSide');
+  const closeAuditModalBtn = document.getElementById('closeAuditModalBtn');
+  const closeAuditModalFooterBtn = document.getElementById('closeAuditModalFooterBtn');
+
+  function openAuditModal() {
+    if (!auditModal) return;
+    auditModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeAuditModal() {
+    if (!auditModal) return;
+    auditModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnOpenAuditModal) {
+    btnOpenAuditModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAuditModal();
+    });
+  }
+
+  if (btnOpenAuditModalSide) {
+    btnOpenAuditModalSide.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAuditModal();
+    });
+  }
+
+  if (closeAuditModalBtn) closeAuditModalBtn.addEventListener('click', closeAuditModal);
+  if (closeAuditModalFooterBtn) closeAuditModalFooterBtn.addEventListener('click', closeAuditModal);
+
+  if (auditModal) {
+    auditModal.addEventListener('click', (e) => {
+      if (e.target === auditModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeAuditModal();
+      }
+    });
+  }
+
+  // 14. DOWNLOAD DESKTOP APP MODAL
+  const downloadModal = document.getElementById('downloadModal');
+  const btnDownloadDesktopApp = document.getElementById('btnDownloadDesktopApp');
+  const closeDownloadModalBtn = document.getElementById('closeDownloadModalBtn');
+  const closeDownloadModalFooterBtn = document.getElementById('closeDownloadModalFooterBtn');
+
+  function openDownloadModal() {
+    if (!downloadModal) return;
+    downloadModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeDownloadModal() {
+    if (!downloadModal) return;
+    downloadModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnDownloadDesktopApp) {
+    btnDownloadDesktopApp.addEventListener('click', (e) => {
+      e.preventDefault();
+      openDownloadModal();
+    });
+  }
+
+  if (closeDownloadModalBtn) closeDownloadModalBtn.addEventListener('click', closeDownloadModal);
+  if (closeDownloadModalFooterBtn) closeDownloadModalFooterBtn.addEventListener('click', closeDownloadModal);
+
+  if (downloadModal) {
+    downloadModal.addEventListener('click', (e) => {
+      if (e.target === downloadModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeDownloadModal();
+      }
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && privacyModal && privacyModal.classList.contains('active')) {
-      closePrivacyModal();
+    if (e.key === 'Escape') {
+      if (privacyModal && privacyModal.classList.contains('active')) closePrivacyModal();
+      if (auditModal && auditModal.classList.contains('active')) closeAuditModal();
+      if (downloadModal && downloadModal.classList.contains('active')) closeDownloadModal();
     }
   });
 

@@ -130,6 +130,16 @@ assert(scene14HasAccessCTA && scene14HasExploreCTA, '39. Spotlight CTAs ("GET EA
 assert(html.includes('hud-footer-center') && html.includes('left-1/2 -translate-x-1/2') && html.includes('2026 if.') && html.includes('id="btnPrivacyPolicy"'), '40. Footer center (2026 if. • [ PRIVACY POLICY ]) is dead-center aligned with header logo');
 assert(css.includes('body.scene-climax-active .hud-footer-center .hud-footer-copy') && css.includes('#07150e'), '41. Scene 14 Spotlight Finale turns "2026 if." to black (#07150e) exclusively in spotlight section');
 
+// 18. Intermission / Commercial Break Section & BYOK Privacy Architecture
+const breakSectionMatch = html.includes('id="scene-commercial-break"') && html.includes('COMMERCIAL BREAK');
+assert(breakSectionMatch, '42. Intermission / Commercial Break section present between scene-03 and scene-04 with COMMERCIAL BREAK badge');
+
+const byokDownloadPresent = html.includes('id="btnDownloadDesktopApp"') && html.includes('DOWNLOAD DESKTOP APP (BYOK)') && html.includes('Monthly License');
+assert(byokDownloadPresent, '43. Desktop app download CTA, BYOK privacy guarantee, and monthly subscription model present');
+
+const auditModalAndPdfPresent = html.includes('id="auditModal"') && html.includes('withif-security-audit-data-disclosure.pdf') && html.includes('CLOUD AI USERS NOTICE');
+assert(auditModalAndPdfPresent, '44. Audit report modal, downloadable PDF document, and cloud AI training disclosure present');
+
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
 console.log(`PASSED: ${passCount}`);

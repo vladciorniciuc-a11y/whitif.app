@@ -335,6 +335,33 @@ body.epoch-digital .margin-rail {
   box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.35), 0 0 100px rgba(255, 255, 255, 0.5);
 }
 
+/* Intermission / Commercial Break Section (Pure Solid White Canvas) */
+#scene-commercial-break .photo-frame {
+  background-color: #fdfdfb;
+  border-color: rgba(7, 21, 14, 0.15);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.25), 0 0 80px rgba(255, 255, 255, 0.4);
+}
+
+.commercial-break-box {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.commercial-card {
+  background: #eef3e8 !important;
+  color: #13241b !important;
+  border: 1px solid rgba(7, 21, 14, 0.16) !important;
+  box-shadow: 0 24px 50px rgba(7, 21, 14, 0.12), 0 4px 16px rgba(7, 21, 14, 0.05) !important;
+}
+
+.roadmap-dot.commercial-dot {
+  border-color: #ff334b;
+}
+
+.roadmap-dot.commercial-dot.active {
+  background: #ff334b;
+  box-shadow: 0 0 16px #ff334b, 0 0 4px #fff;
+}
+
 #scene-14 .video-backdrop {
   opacity: 0.88;
   filter: contrast(1.15) brightness(1.02);
@@ -655,6 +682,11 @@ body.scene-climax-active #btnPrivacyPolicy {
 body.scene-climax-active #btnPrivacyPolicy:hover {
   color: #d4af37 !important;
   border-color: #d4af37 !important;
+}
+
+body.scene-climax-active #hudTimecode,
+body.scene-climax-active .camera-hud-top .text-\[\#38e07b\] {
+  color: #0b5931 !important;
 }
 
 .rec-badge {

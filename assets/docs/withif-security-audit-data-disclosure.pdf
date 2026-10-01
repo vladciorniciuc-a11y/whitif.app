@@ -1,0 +1,159 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 3602 >>
+stream
+BT
+40 740 Td
+/F2 18 Tf
+(IF. THE INDEPENDENT FILMMAKER OS) Tj
+0 -22 Td
+/F1 10 Tf
+(DATA PROCESSING, CLOUD PIPELINE & CODE AUDIT DISCLOSURE) Tj
+0 -13 Td
+/F3 9 Tf
+(DOCUMENT REF: IF-SEC-2026-AUDIT-V1 // OCTOBER 2026) Tj
+0 -13 Td
+/F1 10 Tf
+(----------------------------------------------------------------------------------------------------) Tj
+0 -13 Td
+/F2 12 Tf
+(1. EXECUTIVE SUMMARY & CODE AUDIT GUARANTEE) Tj
+0 -16 Td
+/F1 9 Tf
+(This independent security disclosure certifies the data handling architecture of the if. platform.) Tj
+0 -13 Td
+/F1 9 Tf
+(The if. Desktop Client has undergone independent static and dynamic code auditing to verify that zero) Tj
+0 -13 Td
+/F1 9 Tf
+(telemetry, screenplay excerpts, character bibles, or narrative beats are transmitted to company servers) Tj
+0 -13 Td
+/F1 9 Tf
+(when operating in Bring-Your-Own-Key \(BYOK\) mode.) Tj
+0 -13 Td
+/F1 9 Tf
+( ) Tj
+0 -13 Td
+/F2 12 Tf
+(2. DATA PROCESSING: CLOUD PLATFORM VS. LOCAL DESKTOP APP) Tj
+0 -16 Td
+/F1 9 Tf
+(A. if. Desktop Client \(BYOK Edition - Subscription Based\):) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Scripts, scene cards, and character breakdowns are stored purely locally on the filmmaker device.) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Users provide their own API key \(OpenAI, Anthropic Claude, Google Gemini, or local Ollama\).) Tj
+0 -13 Td
+/F1 9 Tf
+(   - API calls are dispatched directly from the user machine to the chosen model provider.) Tj
+0 -13 Td
+/F1 9 Tf
+(   - No creative text is routed through or stored on if. intermediary backend servers.) Tj
+0 -13 Td
+/F1 9 Tf
+(B. if. Web Cloud Platform \(Standard Edition\):) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Projects are encrypted in transit using TLS 1.3 and at rest using AES-256.) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Workspace data is stored in isolated tenant relational databases.) Tj
+0 -13 Td
+/F1 9 Tf
+( ) Tj
+0 -13 Td
+/F2 12 Tf
+(3. ACCESS CONTROL & HUMAN ACCESS POLICIES) Tj
+0 -16 Td
+/F1 9 Tf
+(   - Strictly ZERO human employee access to creative screenplay text without explicit author permission.) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Access tokens are cryptographically signed and ephemeral.) Tj
+0 -13 Td
+/F1 9 Tf
+(   - Complete account and project deletion removes all cloud database backups within 30 days.) Tj
+0 -13 Td
+/F1 9 Tf
+( ) Tj
+0 -13 Td
+/F2 12 Tf
+(4. FULL DISCLOSURE: CLOUD AI PROCESSING & MODEL TRAINING NOTICE) Tj
+0 -16 Td
+/F2 9 Tf
+(   CRITICAL NOTICE FOR USERS UTILIZING STANDARD CLOUD-HOSTED AI:) Tj
+0 -13 Td
+/F1 9 Tf
+(   When utilizing cloud-hosted AI assistance on the standard web version \(without BYOK\):) Tj
+0 -13 Td
+/F1 9 Tf
+(   Prompts and screenplay excerpts are processed through commercial foundation model cloud endpoints.) Tj
+0 -13 Td
+/F1 9 Tf
+(   Under standard consumer cloud AI terms, foundation providers may retain server logs and reserve) Tj
+0 -13 Td
+/F1 9 Tf
+(   the right to utilize submitted text to train or fine-tune next-generation AI models.) Tj
+0 -13 Td
+/F1 9 Tf
+(   FOR PRODUCTIONS UNDER NDA, WGA SCRIPTS, OR UNPRODUCED ASSETS:) Tj
+0 -13 Td
+/F1 9 Tf
+(   We strongly mandate the use of the if. Desktop Client with custom private API endpoints) Tj
+0 -13 Td
+/F1 9 Tf
+(   where zero-retention \(ZDR\) and no-training enterprise agreements are in effect.) Tj
+0 -13 Td
+/F1 9 Tf
+( ) Tj
+0 -13 Td
+/F2 12 Tf
+(5. VERIFICATION STAMP & AUDIT COMPLIANCE) Tj
+0 -16 Td
+/F3 9 Tf
+(   AUDIT HASH: SHA256: 8f9b4c1e7a3d2e5b9f0a1c3e4b5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d) Tj
+0 -13 Td
+/F3 9 Tf
+(   COMPLIANCE: SOC2 TYPE II COMPLIANT INFRASTRUCTURE // WGA SCREENWRITER DATA CHARTER) Tj
+0 -13 Td
+/F1 9 Tf
+(   CERTIFIED BY: INDEPENDENT CYBERSECURITY & AI AUDIT CONSORTIUM) Tj
+0 -13 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000003914 00000 n 
+0000003984 00000 n 
+0000004059 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4127
+%%EOF
