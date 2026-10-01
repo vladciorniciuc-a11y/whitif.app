@@ -66,8 +66,8 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/vladciorniciuc-a11y/whitif.app.git
-   cd whitif.app
+   git clone https://github.com/vladciorniciuc-a11y/withif.app.git
+   cd withif.app
    ```
 
 2. **Serve locally:**
