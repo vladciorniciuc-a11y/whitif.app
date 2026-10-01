@@ -75,9 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const parentSection = video.closest('.story-section');
     const isFinale = parentSection && parentSection.id === 'scene-14';
     const isHero = parentSection && parentSection.id === 'scene-00';
+    const isPresenter = video.id === 'theSetPresenterVideo';
 
-    // Scene 14 (Spotlight Finale Climax) remains in continuous loop; scenes 00-13 stop at last frame (no loop)
-    if (isFinale) {
+    // Scene 14 (Spotlight Finale Climax) and The Set Presenter remain in continuous loop; scenes 00-13 stop at last frame (no loop)
+    if (isFinale || isPresenter) {
       video.loop = true;
       video.setAttribute('loop', '');
     } else {
@@ -482,6 +483,13 @@ document.addEventListener('DOMContentLoaded', () => {
       activeVideo.play().catch(() => {});
     }
 
+    // Initialize & play The Set 360 Virtual Stage if entering scene-the-set
+    if (targetSection.id === 'scene-the-set') {
+      initTheSet360();
+      const presenterVid = document.getElementById('theSetPresenterVideo');
+      if (presenterVid) presenterVid.play().catch(() => {});
+    }
+
     // Trigger refined text reveal
     revealSceneContent(targetIndex);
 
@@ -525,6 +533,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (vid && !vid.paused) vid.pause();
       }
     });
+
+    // Pause The Set presenter video if not currently on scene-the-set
+    const currentSec = storySections[settledIndex];
+    const isTheSet = currentSec && currentSec.id === 'scene-the-set';
+    const presenterVid = document.getElementById('theSetPresenterVideo');
+    if (presenterVid && !isTheSet && !presenterVid.paused) {
+      presenterVid.pause();
+    }
 
     // Release transition lock cleanly
     isTransitioning = false;
@@ -576,7 +592,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const deltaY = touchStartY - touchEndY;
     const deltaX = touchStartX - touchEndX;
 
-    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 35) {
+    const isCurrentTheSet = storySections[currentSceneIndex]?.id === 'scene-the-set';
+    const swipeThreshold = isCurrentTheSet ? 90 : 35;
+
+    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > swipeThreshold) {
       if (deltaY > 0) {
         if (currentSceneIndex < totalSections - 1) {
           goToScene(currentSceneIndex + 1);
@@ -671,6 +690,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Window Resize Alignment
   window.addEventListener('resize', () => {
     ScrollTrigger.refresh();
+    if (theSetViewer && typeof theSetViewer.resize === 'function') {
+      theSetViewer.resize();
+    }
     if (!isTransitioning) {
       const targetScroll = currentSceneIndex * window.innerHeight;
       if (lenis) {
@@ -1232,6 +1254,81 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       openPrivacyModal();
     });
+  }
+
+  // 13. The Set 360° Virtual Production Soundstage (Pannellum Engine & Presenter Audio)
+  let theSetViewer = null;
+
+  function initTheSet360() {
+    if (theSetViewer || typeof pannellum === 'undefined') return;
+    const container = document.getElementById('theSetPanorama');
+    if (!container) return;
+
+    try {
+      theSetViewer = pannellum.viewer('theSetPanorama', {
+        type: 'equirectangular',
+        panorama: 'assets/images/the_set_360.jpg',
+        autoLoad: true,
+        autoRotate: -1.2,
+        compass: false,
+        showControls: false,
+        mouseZoom: false,
+        hfov: 100,
+        minHfov: 70,
+        maxHfov: 120
+      });
+
+      // Fade out 360 gesture cue on first user interaction
+      const fadeCue = () => {
+        const cue = document.getElementById('theSet360Cue');
+        if (cue) {
+          cue.style.opacity = '0';
+          cue.style.pointerEvents = 'none';
+        }
+      };
+      container.addEventListener('mousedown', fadeCue, { once: true });
+      container.addEventListener('touchstart', fadeCue, { once: true });
+    } catch (err) {
+      console.warn('Pannellum init error:', err);
+    }
+  }
+
+  // Presenter Sound Button Toggle: [ TAP FOR SOUND 🎙️ ]
+  const btnTheSetSound = document.getElementById('btnTheSetSound');
+  const theSetPresenterVideo = document.getElementById('theSetPresenterVideo');
+  const theSetSoundIcon = document.getElementById('theSetSoundIcon');
+  const theSetSoundText = document.getElementById('theSetSoundText');
+
+  if (btnTheSetSound && theSetPresenterVideo) {
+    btnTheSetSound.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (theSetPresenterVideo.muted) {
+        theSetPresenterVideo.muted = false;
+        theSetPresenterVideo.play().catch(() => {});
+        if (theSetSoundText) theSetSoundText.textContent = 'SOUND [ON] 🎙️';
+        btnTheSetSound.classList.add('bg-[#38e07b]', 'text-[#07150e]', 'border-[#38e07b]');
+        btnTheSetSound.classList.remove('bg-[#d4af37]/10', 'text-[#d4af37]', 'border-[#d4af37]');
+        if (theSetSoundIcon) {
+          theSetSoundIcon.setAttribute('data-lucide', 'volume-2');
+        }
+      } else {
+        theSetPresenterVideo.muted = true;
+        if (theSetSoundText) theSetSoundText.textContent = 'TAP FOR SOUND 🎙️';
+        btnTheSetSound.classList.remove('bg-[#38e07b]', 'text-[#07150e]', 'border-[#38e07b]');
+        btnTheSetSound.classList.add('bg-[#d4af37]/10', 'text-[#d4af37]', 'border-[#d4af37]');
+        if (theSetSoundIcon) {
+          theSetSoundIcon.setAttribute('data-lucide', 'volume-x');
+        }
+      }
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  }
+
+  // If initial load starts on scene-the-set, initialize immediately
+  if (storySections[currentSceneIndex] && storySections[currentSceneIndex].id === 'scene-the-set') {
+    initTheSet360();
   }
 
   // Initialize Lucide Icons

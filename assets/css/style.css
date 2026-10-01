@@ -362,6 +362,53 @@ body.epoch-digital .margin-rail {
   box-shadow: 0 0 16px #ff334b, 0 0 4px #fff;
 }
 
+/* The Set 360 Virtual Stage (Emerald Green Marker) */
+.roadmap-dot.the-set-dot {
+  border-color: #38e07b;
+}
+
+.roadmap-dot.the-set-dot.active {
+  background: #38e07b;
+  box-shadow: 0 0 16px #38e07b, 0 0 4px #fff;
+}
+
+/* 360 Degree Virtual Stage Custom Styling */
+.the-set-panorama-container {
+  touch-action: none;
+}
+
+.the-set-panorama-container .pnlm-container {
+  background: #050c08 !important;
+}
+
+.the-set-panorama-container .pnlm-load-box {
+  background: rgba(7, 21, 14, 0.9) !important;
+  border: 1px solid rgba(56, 224, 123, 0.4) !important;
+  border-radius: 12px !important;
+  color: #38e07b !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+@keyframes swipeHand {
+  0% { transform: translateX(-6px); opacity: 0.6; }
+  50% { transform: translateX(6px); opacity: 1; }
+  100% { transform: translateX(-6px); opacity: 0.6; }
+}
+
+.animate-swipe-hand {
+  animation: swipeHand 1.8s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 9s linear infinite;
+}
+
+
 #scene-14 .video-backdrop {
   opacity: 0.88;
   filter: contrast(1.15) brightness(1.02);

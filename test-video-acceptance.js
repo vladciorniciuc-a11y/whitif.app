@@ -30,9 +30,9 @@ const js = fs.readFileSync(jsPath, 'utf8');
 const cssPath = path.join(__dirname, 'assets', 'css', 'style.css');
 const css = fs.readFileSync(cssPath, 'utf8');
 
-// 1. Video Tag Count
-const videoMatches = html.match(/<video[^>]*>/g) || [];
-assert(videoMatches.length === 15, '1. Total 15 Story Section Videos Present in HTML', `Found ${videoMatches.length}`);
+// 1. Video Tag Count: 15 Story Section Backdrop Videos
+const backdropVideos = html.match(/<video class="video-backdrop"[^>]*>/g) || [];
+assert(backdropVideos.length === 15, '1. Total 15 Story Section Backdrop Videos Present in HTML', `Found ${backdropVideos.length}`);
 
 // 2. Hero Video (Scene 00) Autoplay & No Loop & No Replay Button
 const scene00Match = html.match(/<section id="scene-00"[\s\S]*?<video[^>]*>/);
@@ -47,19 +47,19 @@ const scene14Match = html.match(/<section id="scene-14"[\s\S]*?<video[^>]*>/);
 const scene14HasLoop = scene14Match && scene14Match[0].includes('loop');
 assert(scene14HasLoop, '5. Scene 14 (Spotlight Finale) video has loop attribute enabled');
 
-const loopingVideos = videoMatches.filter(v => v.includes('loop'));
-assert(loopingVideos.length === 1, '6. Only Scene 14 has loop attribute (Scenes 00-13 stop at last frame)', `Found ${loopingVideos.length} videos with loop`);
+const loopingBackdropVideos = backdropVideos.filter(v => v.includes('loop'));
+assert(loopingBackdropVideos.length === 1, '6. Only Scene 14 has loop attribute among backdrop reels (Scenes 00-13 stop at last frame)', `Found ${loopingBackdropVideos.length} videos with loop`);
 
-// 4. Muted & Playsinline Present
-const mutedVideos = videoMatches.filter(v => v.includes('muted'));
-assert(mutedVideos.length === 15, '7. HTML "muted" attribute present on all 15 videos', `Found ${mutedVideos.length}`);
+// 4. Muted & Playsinline Present on All Backdrop Videos
+const mutedBackdropVideos = backdropVideos.filter(v => v.includes('muted'));
+assert(mutedBackdropVideos.length === 15, '7. HTML "muted" attribute present on all 15 backdrop videos', `Found ${mutedBackdropVideos.length}`);
 
-const playsinlineVideos = videoMatches.filter(v => v.includes('playsinline'));
-assert(playsinlineVideos.length === 15, '8. HTML "playsinline" attribute present on all 15 videos', `Found ${playsinlineVideos.length}`);
+const playsinlineBackdropVideos = backdropVideos.filter(v => v.includes('playsinline'));
+assert(playsinlineBackdropVideos.length === 15, '8. HTML "playsinline" attribute present on all 15 backdrop videos', `Found ${playsinlineBackdropVideos.length}`);
 
 // 5. Fallback Source Configuration
-const fallbackVideos = videoMatches.filter(v => v.includes('data-fallback'));
-assert(fallbackVideos.length === 15, '9. Fallback video configuration defined on all videos', `Found ${fallbackVideos.length}`);
+const fallbackVideos = backdropVideos.filter(v => v.includes('data-fallback'));
+assert(fallbackVideos.length === 15, '9. Fallback video configuration defined on all 15 backdrop videos', `Found ${fallbackVideos.length}`);
 
 // 6. JavaScript Video Loop Rules: scenes 00-13 loop = false; scene 14 loop = true
 assert(js.includes('video.loop = false;'), '10. JavaScript enforces video.loop = false for scenes 00-13');
@@ -148,6 +148,25 @@ assert(hasScenePrefixes, '45. Section title badges use "Scene." prefix instead o
 const commercialSectionHtml = html.split('id="scene-commercial-break"')[1]?.split('</section>')[0] || '';
 const isCommercialCentered = commercialSectionHtml.includes('justify-center items-center') && commercialSectionHtml.includes('text-center');
 assert(isCommercialCentered, '46. Commercial Break section content is centered in the middle of the page');
+
+// 21. The Set 360° Virtual Production Soundstage Acceptance Checks
+const theSetSectionPresent = html.includes('id="scene-the-set"') && html.includes('id="theSetPanorama"');
+assert(theSetSectionPresent, '47. The Set section (#scene-the-set) and Pannellum panorama container (#theSetPanorama) present in HTML');
+
+const theSetRoadmapDotPresent = html.includes('the-set-dot') && html.includes('data-target="#scene-the-set"') && html.includes('>The Set<');
+assert(theSetRoadmapDotPresent, '48. Emerald green roadmap dot (.the-set-dot) for "The Set" present between Scene 08 and Scene 09');
+
+const theSetPannellumAssets = html.includes('assets/js/pannellum.js') && html.includes('assets/css/pannellum.css');
+assert(theSetPannellumAssets, '49. Self-hosted Pannellum 360 engine JS and CSS included locally (zero external CDNs)');
+
+const theSetPresenterAndAudio = html.includes('id="theSetPresenterVideo"') && html.includes('id="btnTheSetSound"') && html.includes('TAP FOR SOUND 🎙️');
+assert(theSetPresenterAndAudio, '50. Standing presenter video card with [ TAP FOR SOUND 🎙️ ] audio button present');
+
+const theSetJsController = js.includes('initTheSet360') && js.includes('theSetViewer') && js.includes('btnTheSetSound.addEventListener');
+assert(theSetJsController, '51. JavaScript controllers for 360 panorama initialization and host audio toggle integrated');
+
+const theSetCssStyles = css.includes('.roadmap-dot.the-set-dot') && css.includes('#38e07b') && css.includes('.the-set-panorama-container');
+assert(theSetCssStyles, '52. Emerald green marker styling (#38e07b) and 360 container styles defined in CSS');
 
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
