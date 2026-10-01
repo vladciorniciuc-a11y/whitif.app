@@ -1279,14 +1279,9 @@ document.addEventListener('DOMContentLoaded', () => {
         maxHfov: 120
       });
 
-      // Fade out 360 gesture cue & central 360 globe badge on first user interaction
+      // Fade out central 360 globe badge on first user interaction
       const fadeCue = () => {
-        const cue = document.getElementById('theSet360Cue');
         const globe = document.getElementById('theSetCenterGlobe');
-        if (cue) {
-          cue.style.opacity = '0';
-          cue.style.pointerEvents = 'none';
-        }
         if (globe) {
           globe.classList.add('faded');
         }
