@@ -98,7 +98,7 @@ assert(html.includes('data-lucide="step-back"'), '30. Button 2 uses "step-back" 
 assert(html.includes('data-lucide="clapperboard"'), '31. Button 3 uses "clapperboard" icon (🎬 clacheta)');
 assert(html.includes('title="Spotlight Finale"') && html.includes('>Spotlight Finale<'), '32. Button 1 has English tooltip: "Spotlight Finale"');
 assert(html.includes('title="Previous Chapter"') && html.includes('>Previous Chapter<'), '33. Button 2 has English tooltip: "Previous Chapter"');
-assert(html.includes('title="Return to Prologue"') && html.includes('>Return to Prologue<'), '34. Button 3 has English tooltip: "Return to Prologue"');
+assert(html.includes('title="Return to Trailer"') && html.includes('>Return to Trailer<'), '34. Button 3 has English tooltip: "Return to Trailer"');
 
 // 13. Quick Navigation Functionality
 assert(js.includes('btnSpotlightDirect.addEventListener') && js.includes('goToScene(totalSections - 1);'), '35. Button 1 (projector) navigates directly to Spotlight Finale (Scene 14)');
