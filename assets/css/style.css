@@ -581,13 +581,80 @@ body.scene-climax-active #hudSceneNumber {
   color: #07150e !important;
 }
 
-body.scene-climax-active .camera-hud-bottom .hud-copyright {
-  color: rgba(7, 21, 14, 0.6) !important;
+/* Centered Footer Info in Bottom HUD (Dead-center horizontally, aligned with header logo) */
+.hud-footer-center {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 85;
+  pointer-events: auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 768px) {
+  .hud-footer-center {
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hud-footer-center {
+    font-size: 9px;
+    gap: 6px;
+  }
+}
+
+.hud-footer-copy {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.4s ease;
+}
+
+.hud-footer-sep {
+  color: rgba(255, 255, 255, 0.2);
+  transition: color 0.4s ease;
+}
+
+.hud-privacy-btn {
+  color: rgba(212, 175, 55, 0.85);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  transition: all 0.4s ease;
+}
+
+.hud-privacy-btn:hover {
+  color: #d4af37;
+  border-color: #d4af37;
+}
+
+/* Scene 14 Spotlight Finale: telemetry gets dark muted tone */
+body.scene-climax-active .camera-hud-telemetry span {
+  color: rgba(7, 21, 14, 0.55) !important;
+}
+
+/* Scene 14 Spotlight Finale: ONLY in this section, 2026 if. is black (#07150e) */
+body.scene-climax-active .hud-footer-center .hud-footer-copy {
+  color: #07150e !important;
+  font-weight: 700;
+}
+
+body.scene-climax-active .hud-footer-center .hud-footer-sep {
+  color: rgba(7, 21, 14, 0.35) !important;
 }
 
 body.scene-climax-active #btnPrivacyPolicy {
   color: #07150e !important;
   border-color: rgba(7, 21, 14, 0.45) !important;
+}
+
+body.scene-climax-active #btnPrivacyPolicy:hover {
+  color: #d4af37 !important;
+  border-color: #d4af37 !important;
 }
 
 .rec-badge {

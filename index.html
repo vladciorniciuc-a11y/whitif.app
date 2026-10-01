@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=197200" />
+  <link rel="stylesheet" href="assets/css/style.css?v=197300" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -146,14 +146,18 @@
 
   <!-- Bottom Camera HUD -->
   <footer class="camera-hud camera-hud-bottom flex justify-between items-center z-50">
-    <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-white/40 text-[10px] font-mono">
-      <span>LENS: 35MM T1.5 ANAMORPHIC</span>
+    <!-- Left Camera Lens Telemetry -->
+    <div class="camera-hud-telemetry flex items-center gap-2 sm:gap-3 text-white/40 text-[10px] font-mono">
+      <span class="hidden sm:inline">LENS: 35MM T1.5 ANAMORPHIC</span>
       <span class="hidden md:inline text-white/20">•</span>
       <span class="hidden md:inline">GATE: 35MM FULL APERTURE</span>
-      <span class="text-white/20">•</span>
-      <span class="hud-copyright text-white/50">© 2026 IF.</span>
-      <span class="text-white/20">•</span>
-      <button id="btnPrivacyPolicy" class="hud-privacy-btn pointer-events-auto text-[#d4af37]/80 hover:text-[#d4af37] border-b border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer font-bold tracking-wider" aria-haspopup="dialog" aria-controls="privacyModal">
+    </div>
+
+    <!-- Center Footer Info: Aligned dead-center with Header Logo -->
+    <div class="hud-footer-center fixed left-1/2 -translate-x-1/2 flex items-center gap-2 text-[10px] font-mono z-50 whitespace-nowrap pointer-events-auto">
+      <span class="hud-footer-copy tracking-wider">2026 if.</span>
+      <span class="hud-footer-sep text-white/20">•</span>
+      <button id="btnPrivacyPolicy" class="hud-privacy-btn pointer-events-auto cursor-pointer font-bold tracking-wider" aria-haspopup="dialog" aria-controls="privacyModal">
         [ PRIVACY POLICY ]
       </button>
     </div>
