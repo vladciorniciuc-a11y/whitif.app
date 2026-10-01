@@ -6,6 +6,27 @@
   <title>if. — The Independent Filmmaker OS | A place for the film</title>
   <meta name="description" content="The unified cinematic operating system for independent filmmakers. From screenplay and financing to set and distribution." />
 
+  <!-- Favicon & Theme Color -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <meta name="theme-color" content="#07150e" />
+
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://withif.app/" />
+  <meta property="og:site_name" content="if. — The Independent Filmmaker OS" />
+  <meta property="og:title" content="if. — The Independent Filmmaker OS | A place for the film" />
+  <meta property="og:description" content="The unified cinematic operating system for independent filmmakers. From screenplay and financing to set and distribution." />
+  <meta property="og:image" content="https://withif.app/assets/images/posters/poster-sample.jpg" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://withif.app/" />
+  <meta name="twitter:title" content="if. — The Independent Filmmaker OS | A place for the film" />
+  <meta name="twitter:description" content="The unified cinematic operating system for independent filmmakers. From screenplay and financing to set and distribution." />
+  <meta name="twitter:image" content="https://withif.app/assets/images/posters/poster-sample.jpg" />
+
   <!-- Tailwind CSS (Local Runtime, 100% Sovereign & Zero External Tracking) -->
   <script src="assets/js/tailwind.min.js"></script>
   <script>
@@ -275,7 +296,8 @@
       <div class="photo-frame">
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" autoplay muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" autoplay muted playsinline preload="auto" poster="assets/images/posters/poster-sample.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/sample.webm" type="video/webm" />
           <source src="videos/sample.mp4?v=172247" type="video/mp4" />
         </video>
         <!-- Chromatic Mask: Noir Absolute -->
@@ -309,8 +331,8 @@
 
           <!-- CTAs matching Spotlight Finale -->
           <div class="hero-ctas flex flex-wrap items-center justify-center gap-4 mb-8">
-            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
-               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase">
+            <a href="#" id="btnOpenEarlyAccessHero"
+               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase cursor-pointer">
               <span>GET EARLY ACCESS</span>
               <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
             </a>
@@ -338,7 +360,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section1.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section1.webm" type="video/webm" />
           <source src="videos/section1.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -403,7 +426,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section2.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section2.webm" type="video/webm" />
           <source src="videos/section2.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -467,7 +491,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section3.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section3.webm" type="video/webm" />
           <source src="videos/section3.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -642,7 +667,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section4.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section4.webm" type="video/webm" />
           <source src="videos/section4.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -706,7 +732,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section5.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section5.webm" type="video/webm" />
           <source src="videos/section5.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -770,7 +797,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section6.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section6.webm" type="video/webm" />
           <source src="videos/section6.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -834,7 +862,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section7.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section7.webm" type="video/webm" />
           <source src="videos/section7.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -898,7 +927,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section8.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section8.webm" type="video/webm" />
           <source src="videos/section8.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -962,7 +992,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section9.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section9.webm" type="video/webm" />
           <source src="videos/section9.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -1026,7 +1057,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section10.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section10.webm" type="video/webm" />
           <source src="videos/section10.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -1090,7 +1122,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section11.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section11.webm" type="video/webm" />
           <source src="videos/section11.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -1154,7 +1187,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section12.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section12.webm" type="video/webm" />
           <source src="videos/section12.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -1218,7 +1252,8 @@
         <!-- Physical Frame Splice Line & Light Leak Burst -->
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" muted playsinline preload="metadata" poster="assets/images/posters/poster-section13.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/section13.webm" type="video/webm" />
           <source src="videos/section13.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask -->
@@ -1281,7 +1316,8 @@
       <div class="photo-frame">
         <div class="frame-splice-line"></div>
         <div class="splice-light-leak"></div>
-        <video class="video-backdrop" loop muted playsinline preload="auto" data-fallback="videos/sample.mp4">
+        <video class="video-backdrop" loop muted playsinline preload="metadata" poster="assets/images/posters/poster-sample.jpg" data-fallback="videos/sample.mp4">
+          <source src="videos/sample.webm" type="video/webm" />
           <source src="videos/sample.mp4" type="video/mp4" />
         </video>
         <!-- Chromatic Mask: Pure Radiant White -->
@@ -1311,8 +1347,8 @@
           </div>
 
           <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="https://withif.app/" target="_blank" rel="noopener noreferrer"
-               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase">
+            <a href="#" id="btnOpenEarlyAccessFinale"
+               class="gold-button inline-flex items-center gap-2 px-8 py-3.5 text-sm font-mono tracking-wider uppercase cursor-pointer">
               <span>GET EARLY ACCESS</span>
               <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
             </a>
@@ -1323,8 +1359,20 @@
             </a>
           </div>
 
-          <div class="mt-6 sm:mt-8 text-[11px] font-mono text-[#132c21]/70 tracking-widest uppercase">
-            if. The Independent Filmmaker OS &bull; A place for the film &bull; All rights reserved.
+          <!-- Scene 14 Footer Legal Navigation & Clearances -->
+          <div class="mt-8 pt-6 border-t border-[#07150e]/15 flex flex-col items-center gap-2.5">
+            <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-mono text-[#132c21]/80 tracking-wider uppercase">
+              <button id="btnOpenTermsModal" class="hover:text-[#07150e] font-semibold underline-offset-4 hover:underline cursor-pointer transition">Terms of Service</button>
+              <span class="opacity-40">•</span>
+              <button id="btnOpenPrivacyModalFooter" class="hover:text-[#07150e] font-semibold underline-offset-4 hover:underline cursor-pointer transition">Privacy Charter</button>
+              <span class="opacity-40">•</span>
+              <button id="btnOpenAiDisclosureModal" class="hover:text-[#07150e] font-semibold underline-offset-4 hover:underline cursor-pointer transition">AI Media & SynthID Disclosure</button>
+              <span class="opacity-40">•</span>
+              <button id="btnOpenCreditsModal" class="hover:text-[#07150e] font-semibold underline-offset-4 hover:underline cursor-pointer transition">Credits & Tech Specs</button>
+            </div>
+            <div class="text-[10px] font-mono text-[#132c21]/60 tracking-widest uppercase">
+              if. The Independent Filmmaker OS &bull; A place for the film &bull; All rights reserved.
+            </div>
           </div>
         </div>
       </div>
@@ -1616,6 +1664,323 @@
       <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex items-center justify-between font-mono text-[11px]">
         <span class="text-white/40">14-DAY RISK-FREE TRIAL</span>
         <button id="closeDownloadModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
+          [ CLOSE ]
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       EARLY ACCESS INVITATION QUEUE MODAL
+       ========================================================================= -->
+  <div id="earlyAccessModal" class="privacy-modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="earlyAccessModalTitle">
+    <div class="privacy-modal-backdrop absolute inset-0 bg-[#030805]/85 backdrop-blur-md transition-opacity"></div>
+    <div class="privacy-modal-box relative z-10 w-full max-w-lg flex flex-col bg-[#07150e]/95 border border-[#d4af37]/35 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-70"></div>
+      
+      <div class="p-5 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-mono text-[#d4af37] uppercase tracking-widest mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#38e07b] animate-pulse"></span>
+            <span>DIRECTOR COHORT // INVITATION QUEUE</span>
+          </div>
+          <h2 id="earlyAccessModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Request Early Access
+          </h2>
+          <p class="font-mono text-xs text-[#9bb098] mt-1">
+            Join independent auteurs, screenwriters & producers building with if. OS
+          </p>
+        </div>
+        <button id="closeEarlyAccessModalBtn" class="group flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 text-white/70 hover:text-white hover:bg-[#d4af37] hover:text-[#07150e] transition-all cursor-pointer" aria-label="Close Early Access Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="earlyAccessForm" class="p-5 sm:p-6 space-y-4">
+        <div id="earlyAccessFormFields" class="space-y-4">
+          <div>
+            <label for="eaFullName" class="block font-mono text-[11px] uppercase tracking-wider text-[#d4af37] mb-1.5">Full Name / Studio Moniker</label>
+            <input type="text" id="eaFullName" required placeholder="e.g. Jean-Luc V." class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#d4af37] font-sans" />
+          </div>
+          <div>
+            <label for="eaEmail" class="block font-mono text-[11px] uppercase tracking-wider text-[#d4af37] mb-1.5">Cinematic Email Address</label>
+            <input type="email" id="eaEmail" required placeholder="director@filmstudio.com" class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/15 text-white placeholder-white/30 text-sm focus:outline-none focus:border-[#d4af37] font-sans" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="eaRole" class="block font-mono text-[11px] uppercase tracking-wider text-[#d4af37] mb-1.5">Primary Craft</label>
+              <select id="eaRole" class="w-full px-3 py-2.5 rounded-xl bg-[#0d231a] border border-white/15 text-white text-xs focus:outline-none focus:border-[#d4af37] font-mono">
+                <option value="Director">Director / Auteur</option>
+                <option value="Screenwriter">Screenwriter</option>
+                <option value="Producer">Independent Producer</option>
+                <option value="Cinematographer">Cinematographer (DoP)</option>
+                <option value="Editor">Editor / Post Super</option>
+              </select>
+            </div>
+            <div>
+              <label for="eaStage" class="block font-mono text-[11px] uppercase tracking-wider text-[#d4af37] mb-1.5">Project Phase</label>
+              <select id="eaStage" class="w-full px-3 py-2.5 rounded-xl bg-[#0d231a] border border-white/15 text-white text-xs focus:outline-none focus:border-[#d4af37] font-mono">
+                <option value="Development">Screenplay / Dev</option>
+                <option value="Financing">Packaging / Grants</option>
+                <option value="PreProduction">Pre-Production</option>
+                <option value="Production">Active Production</option>
+                <option value="Post">Post & Distribution</option>
+              </select>
+            </div>
+          </div>
+          <div class="p-3 bg-white/5 rounded-xl border border-white/10 text-[11px] text-gray-300 leading-relaxed font-sans">
+            <span class="text-[#38e07b] font-mono font-semibold">SOVEREIGN PRIVACY:</span> Your email will strictly receive admission waves and alpha build notifications. Zero spam, zero external marketing trackers.
+          </div>
+          <button type="submit" class="gold-button w-full py-3 rounded-xl font-mono text-xs tracking-wider uppercase font-bold text-[#07150e] flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#d4af37]/20">
+            <span>REQUEST PRODUCTION PASS</span>
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div id="earlyAccessSuccessState" class="hidden text-center py-6 space-y-3">
+          <div class="w-12 h-12 rounded-full bg-[#38e07b]/20 border border-[#38e07b] flex items-center justify-center mx-auto text-[#38e07b]">
+            <i data-lucide="check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-white">Application Queued</h3>
+          <p class="text-xs text-gray-300 max-w-sm mx-auto leading-relaxed">
+            Your production pass request has been logged. You will receive cryptographic admission credentials upon the next cohort dispatch.
+          </p>
+        </div>
+      </form>
+
+      <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex items-center justify-between font-mono text-[11px]">
+        <span class="text-white/40">RELEASE CANDIDATE V2.4</span>
+        <button id="closeEarlyAccessModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
+          [ CLOSE ]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TERMS OF SERVICE // PLATFORM COVENANT MODAL
+       ========================================================================= -->
+  <div id="termsModal" class="privacy-modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle">
+    <div class="privacy-modal-backdrop absolute inset-0 bg-[#030805]/85 backdrop-blur-md transition-opacity"></div>
+    <div class="privacy-modal-box relative z-10 w-full max-w-2xl max-h-[85vh] flex flex-col bg-[#07150e]/95 border border-[#d4af37]/35 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-70"></div>
+      
+      <div class="p-5 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-mono text-[#d4af37] uppercase tracking-widest mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#d4af37]"></span>
+            <span>LEGAL DOSSIER // TERMS OF SERVICE</span>
+          </div>
+          <h2 id="termsModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Terms & Conditions
+          </h2>
+          <p class="font-mono text-xs text-[#9bb098] mt-1">
+            Platform Covenant, Creator Sovereignty & Film Master Deliveries
+          </p>
+        </div>
+        <button id="closeTermsModalBtn" class="group flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 text-white/70 hover:text-white hover:bg-[#d4af37] hover:text-[#07150e] transition-all cursor-pointer" aria-label="Close Terms Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#f4f7f1]/80 font-sans leading-relaxed custom-scrollbar">
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="file-check" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>1. 100% Unencumbered Intellectual Property Retention</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            You retain sole and exclusive ownership of all screenplays, character bibles, scene beats, shooting drafts, budgets, and final video outputs inputted or generated through <strong>if. OS</strong>. We assert zero claim of ownership, license fee, or royalty interest over any creative material you produce.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="clapperboard" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>2. Scope of Service & Production Assistance</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            The platform provides workflow organization, pre-flight checklists, delivery standards validation (DCI-P3, EBU R128), and chain-of-title tracking. While our tools assist in adhering to festival and distributor submission gates, ultimate legal clearances and copyright compliance remain the responsibility of the producer of record.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>3. Responsible Use & Community Standards</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            Users agree not to utilize the platform to infringe on existing third-party copyrighted motion pictures, trademarks, or publicity rights. Misleading claims of factual documentary authenticity for entirely synthetic media without disclosure are strictly prohibited.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="scale" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>4. Limitation of Liability</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            The presentation portal and software are provided on an "as-is" and "as-available" basis to empower independent filmmakers. To the maximum extent permitted by applicable law, if. shall not be liable for indirect, punitive, or consequential damages resulting from production delays, festival rejections, or hardware failures.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex items-center justify-between font-mono text-[11px]">
+        <span class="text-white/40">EFFECTIVE: OCTOBER 2026</span>
+        <button id="closeTermsModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
+          [ ACCEPT & CLOSE ]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       AI MEDIA & SYNTHID DISCLOSURE MODAL (EU AI ACT & GOOGLE API COMPLIANCE)
+       ========================================================================= -->
+  <div id="aiDisclosureModal" class="privacy-modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="aiDisclosureModalTitle">
+    <div class="privacy-modal-backdrop absolute inset-0 bg-[#030805]/85 backdrop-blur-md transition-opacity"></div>
+    <div class="privacy-modal-box relative z-10 w-full max-w-2xl max-h-[85vh] flex flex-col bg-[#07150e]/95 border border-[#d4af37]/35 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-70"></div>
+      
+      <div class="p-5 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-mono text-[#d4af37] uppercase tracking-widest mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#38e07b] animate-pulse"></span>
+            <span>TRANSPARENCY DECLARATION // EU AI ACT ART. 50</span>
+          </div>
+          <h2 id="aiDisclosureModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            AI Media & SynthID Disclosure
+          </h2>
+          <p class="font-mono text-xs text-[#9bb098] mt-1">
+            Ethical synthetic cinematography, origin provenance & watermarking compliance
+          </p>
+        </div>
+        <button id="closeAiDisclosureModalBtn" class="group flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 text-white/70 hover:text-white hover:bg-[#d4af37] hover:text-[#07150e] transition-all cursor-pointer" aria-label="Close AI Disclosure Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#f4f7f1]/80 font-sans leading-relaxed custom-scrollbar">
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>1. Synthetic & Generative Media Notice</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            In compliance with international synthetic media transparency guidelines and <strong>Article 50 of the European Union Artificial Intelligence Act (EU AI Act)</strong>, we hereby disclose that the cinematic background video sequences (Chapters 00 through 14) and visual mood reels featured throughout this showcase portal have been generated and artistically directed using advanced generative video models, specifically <strong>Google Omni 1.1 Flash / Veo</strong> via licensed enterprise developer interfaces.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="fingerprint" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>2. SynthID Digital Watermarking & Provenance Integrity</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            All video assets produced by Google's generative models embed imperceptible digital watermarks (<strong>SynthID</strong>) directly within the pixel array and container metadata. In strict accordance with Google’s <em>Generative AI Prohibited Use Policy</em> and responsible disclosure standards, our infrastructure preserves these safety and provenance markers without alteration, reverse engineering, or circumvention.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="film" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>3. Conceptual Purpose & Tribute to Cinema History</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            These background visuals serve an exclusively artistic, conceptual, and demonstrative purpose. They represent symbolic allegories of cinema history epochs (from 1920s silent expressionism to 2026 virtual production) to celebrate the craft of independent filmmaking. They do not depict real living individuals, historical documents, or actual proprietary motion picture shoots.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="lock" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>4. Commercial Rights & Zero Training on User Screenplays</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            Generated assets are licensed for commercial web presentation under Google Developer Paid Tier Terms of Service. Furthermore, we reiterate that when authors utilize <strong>if. OS</strong> for their own films, private screenplays and project media are never used to train third-party foundation models.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex items-center justify-between font-mono text-[11px]">
+        <span class="text-white/40">SYNTHID VERIFIED // EU AI ACT COMPLIANT</span>
+        <button id="closeAiDisclosureModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
+          [ UNDERSTOOD ]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CREDITS & ENGINEERING SPECIFICATIONS MODAL
+       ========================================================================= -->
+  <div id="creditsModal" class="privacy-modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="creditsModalTitle">
+    <div class="privacy-modal-backdrop absolute inset-0 bg-[#030805]/85 backdrop-blur-md transition-opacity"></div>
+    <div class="privacy-modal-box relative z-10 w-full max-w-2xl max-h-[85vh] flex flex-col bg-[#07150e]/95 border border-[#d4af37]/35 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden transform scale-95 transition-transform duration-300">
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-70"></div>
+      
+      <div class="p-5 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-mono text-[#d4af37] uppercase tracking-widest mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#d4af37]"></span>
+            <span>COLOPHON // PRODUCTION & TECHNICAL CREDITS</span>
+          </div>
+          <h2 id="creditsModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Credits & Specifications
+          </h2>
+          <p class="font-mono text-xs text-[#9bb098] mt-1">
+            Design Philosophy, Cinema Codecs, Typography & Open Standards
+          </p>
+        </div>
+        <button id="closeCreditsModalBtn" class="group flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 text-white/70 hover:text-white hover:bg-[#d4af37] hover:text-[#07150e] transition-all cursor-pointer" aria-label="Close Credits Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#f4f7f1]/80 font-sans leading-relaxed custom-scrollbar">
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="type" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>Typography System</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            • <strong>Display & Title:</strong> Cinzel (Art-Deco / Classical Cinema Roman inscription)<br>
+            • <strong>Editorial Serif:</strong> Playfair Display (High-contrast editorial typography)<br>
+            • <strong>Body & Interface:</strong> Inter (Optimal legibility across mobile & high-DPI displays)<br>
+            • <strong>Technical Telemetry:</strong> JetBrains Mono (Engineered for camera HUDs, timecodes & script beats)
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="layers" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>Engine & Animation Architecture</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            • <strong>Scrollytelling Engine:</strong> GreenSock GSAP 3.12 with ScrollTrigger pinning & scrub synchronization.<br>
+            • <strong>Kinetic Inertia:</strong> Studio Freight Lenis Smooth Scroll runtime.<br>
+            • <strong>Iconography:</strong> Lucide Icons (clean stroke geometry).<br>
+            • <strong>CSS Runtime:</strong> Locally hosted sovereign Tailwind CSS framework.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="video" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>Dual-Stream Video Pipeline</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            • <strong>Primary Modern Stream:</strong> WebM (libvpx-vp9, constrained CRF 32, zero audio overhead).<br>
+            • <strong>Fallback Stream:</strong> MP4 (H.264 High Profile, 24fps cinema cadence).<br>
+            • <strong>Instant Previews:</strong> Frame-0 lossless JPEG posters with asynchronous smart preloading.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex items-center justify-between font-mono text-[11px]">
+        <span class="text-white/40">WITHIF.APP ARCHITECTURE V2.4</span>
+        <button id="closeCreditsModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
           [ CLOSE ]
         </button>
       </div>

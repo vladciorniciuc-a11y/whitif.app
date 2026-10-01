@@ -1015,13 +1015,224 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 15. EARLY ACCESS WAITLIST MODAL
+  const earlyAccessModal = document.getElementById('earlyAccessModal');
+  const btnOpenEarlyAccessHero = document.getElementById('btnOpenEarlyAccessHero');
+  const btnOpenEarlyAccessFinale = document.getElementById('btnOpenEarlyAccessFinale');
+  const closeEarlyAccessModalBtn = document.getElementById('closeEarlyAccessModalBtn');
+  const closeEarlyAccessModalFooterBtn = document.getElementById('closeEarlyAccessModalFooterBtn');
+  const earlyAccessForm = document.getElementById('earlyAccessForm');
+
+  function openEarlyAccessModal() {
+    if (!earlyAccessModal) return;
+    earlyAccessModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeEarlyAccessModal() {
+    if (!earlyAccessModal) return;
+    earlyAccessModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnOpenEarlyAccessHero) {
+    btnOpenEarlyAccessHero.addEventListener('click', (e) => {
+      e.preventDefault();
+      openEarlyAccessModal();
+    });
+  }
+
+  if (btnOpenEarlyAccessFinale) {
+    btnOpenEarlyAccessFinale.addEventListener('click', (e) => {
+      e.preventDefault();
+      openEarlyAccessModal();
+    });
+  }
+
+  if (closeEarlyAccessModalBtn) closeEarlyAccessModalBtn.addEventListener('click', closeEarlyAccessModal);
+  if (closeEarlyAccessModalFooterBtn) closeEarlyAccessModalFooterBtn.addEventListener('click', closeEarlyAccessModal);
+
+  if (earlyAccessModal) {
+    earlyAccessModal.addEventListener('click', (e) => {
+      if (e.target === earlyAccessModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeEarlyAccessModal();
+      }
+    });
+  }
+
+  if (earlyAccessForm) {
+    earlyAccessForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('eaFullName')?.value || '';
+      const email = document.getElementById('eaEmail')?.value || '';
+      const role = document.getElementById('eaRole')?.value || '';
+      const stage = document.getElementById('eaStage')?.value || '';
+
+      try {
+        localStorage.setItem('withif_early_access', JSON.stringify({ name, email, role, stage, timestamp: new Date().toISOString() }));
+      } catch (err) {}
+
+      const fieldsBox = document.getElementById('earlyAccessFormFields');
+      const successBox = document.getElementById('earlyAccessSuccessState');
+      if (fieldsBox) fieldsBox.classList.add('hidden');
+      if (successBox) successBox.classList.remove('hidden');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+  }
+
+  // 16. TERMS OF SERVICE MODAL
+  const termsModal = document.getElementById('termsModal');
+  const btnOpenTermsModal = document.getElementById('btnOpenTermsModal');
+  const closeTermsModalBtn = document.getElementById('closeTermsModalBtn');
+  const closeTermsModalFooterBtn = document.getElementById('closeTermsModalFooterBtn');
+
+  function openTermsModal() {
+    if (!termsModal) return;
+    termsModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeTermsModal() {
+    if (!termsModal) return;
+    termsModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnOpenTermsModal) {
+    btnOpenTermsModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      openTermsModal();
+    });
+  }
+
+  if (closeTermsModalBtn) closeTermsModalBtn.addEventListener('click', closeTermsModal);
+  if (closeTermsModalFooterBtn) closeTermsModalFooterBtn.addEventListener('click', closeTermsModal);
+
+  if (termsModal) {
+    termsModal.addEventListener('click', (e) => {
+      if (e.target === termsModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeTermsModal();
+      }
+    });
+  }
+
+  // 17. AI MEDIA & SYNTHID DISCLOSURE MODAL
+  const aiDisclosureModal = document.getElementById('aiDisclosureModal');
+  const btnOpenAiDisclosureModal = document.getElementById('btnOpenAiDisclosureModal');
+  const closeAiDisclosureModalBtn = document.getElementById('closeAiDisclosureModalBtn');
+  const closeAiDisclosureModalFooterBtn = document.getElementById('closeAiDisclosureModalFooterBtn');
+
+  function openAiDisclosureModal() {
+    if (!aiDisclosureModal) return;
+    aiDisclosureModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeAiDisclosureModal() {
+    if (!aiDisclosureModal) return;
+    aiDisclosureModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnOpenAiDisclosureModal) {
+    btnOpenAiDisclosureModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAiDisclosureModal();
+    });
+  }
+
+  if (closeAiDisclosureModalBtn) closeAiDisclosureModalBtn.addEventListener('click', closeAiDisclosureModal);
+  if (closeAiDisclosureModalFooterBtn) closeAiDisclosureModalFooterBtn.addEventListener('click', closeAiDisclosureModal);
+
+  if (aiDisclosureModal) {
+    aiDisclosureModal.addEventListener('click', (e) => {
+      if (e.target === aiDisclosureModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeAiDisclosureModal();
+      }
+    });
+  }
+
+  // 18. CREDITS & SPECIFICATIONS MODAL
+  const creditsModal = document.getElementById('creditsModal');
+  const btnOpenCreditsModal = document.getElementById('btnOpenCreditsModal');
+  const closeCreditsModalBtn = document.getElementById('closeCreditsModalBtn');
+  const closeCreditsModalFooterBtn = document.getElementById('closeCreditsModalFooterBtn');
+
+  function openCreditsModal() {
+    if (!creditsModal) return;
+    creditsModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closeCreditsModal() {
+    if (!creditsModal) return;
+    creditsModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnOpenCreditsModal) {
+    btnOpenCreditsModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCreditsModal();
+    });
+  }
+
+  if (closeCreditsModalBtn) closeCreditsModalBtn.addEventListener('click', closeCreditsModal);
+  if (closeCreditsModalFooterBtn) closeCreditsModalFooterBtn.addEventListener('click', closeCreditsModal);
+
+  if (creditsModal) {
+    creditsModal.addEventListener('click', (e) => {
+      if (e.target === creditsModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closeCreditsModal();
+      }
+    });
+  }
+
+  // Global Escape Key Listener for all Modals
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (privacyModal && privacyModal.classList.contains('active')) closePrivacyModal();
       if (auditModal && auditModal.classList.contains('active')) closeAuditModal();
       if (downloadModal && downloadModal.classList.contains('active')) closeDownloadModal();
+      if (earlyAccessModal && earlyAccessModal.classList.contains('active')) closeEarlyAccessModal();
+      if (termsModal && termsModal.classList.contains('active')) closeTermsModal();
+      if (aiDisclosureModal && aiDisclosureModal.classList.contains('active')) closeAiDisclosureModal();
+      if (creditsModal && creditsModal.classList.contains('active')) closeCreditsModal();
     }
   });
+
+  // Also bind Scene 14 Footer Privacy link to open Privacy Modal
+  const btnOpenPrivacyModalFooter = document.getElementById('btnOpenPrivacyModalFooter');
+  if (btnOpenPrivacyModalFooter) {
+    btnOpenPrivacyModalFooter.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPrivacyModal();
+    });
+  }
 
   // Initialize Lucide Icons
   if (typeof lucide !== 'undefined') {
