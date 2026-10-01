@@ -1274,9 +1274,9 @@ document.addEventListener('DOMContentLoaded', () => {
         compass: false,
         showControls: false,
         mouseZoom: false,
-        hfov: 100,
-        minHfov: 70,
-        maxHfov: 120
+        hfov: 88,
+        minHfov: 65,
+        maxHfov: 110
       });
 
       // Fade out central 360 globe badge on first user interaction
