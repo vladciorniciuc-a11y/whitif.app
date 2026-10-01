@@ -872,6 +872,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 12. PRIVACY POLICY MODAL (CINEMATIC CAMERA HUD THEMED)
+  const privacyModal = document.getElementById('privacyModal');
+  const btnPrivacyPolicy = document.getElementById('btnPrivacyPolicy');
+  const closePrivacyModalBtn = document.getElementById('closePrivacyModalBtn');
+  const closePrivacyModalFooterBtn = document.getElementById('closePrivacyModalFooterBtn');
+
+  function openPrivacyModal() {
+    if (!privacyModal) return;
+    privacyModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+      lenis.stop();
+    }
+  }
+
+  function closePrivacyModal() {
+    if (!privacyModal) return;
+    privacyModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+      lenis.start();
+    }
+  }
+
+  if (btnPrivacyPolicy) {
+    btnPrivacyPolicy.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPrivacyModal();
+    });
+  }
+
+  if (closePrivacyModalBtn) closePrivacyModalBtn.addEventListener('click', closePrivacyModal);
+  if (closePrivacyModalFooterBtn) closePrivacyModalFooterBtn.addEventListener('click', closePrivacyModal);
+
+  if (privacyModal) {
+    privacyModal.addEventListener('click', (e) => {
+      if (e.target === privacyModal || e.target.classList.contains('privacy-modal-backdrop')) {
+        closePrivacyModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && privacyModal && privacyModal.classList.contains('active')) {
+      closePrivacyModal();
+    }
+  });
+
   // Initialize Lucide Icons
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();

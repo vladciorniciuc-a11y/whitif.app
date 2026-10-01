@@ -6,8 +6,8 @@
   <title>if. — The Independent Filmmaker OS | A place for the film</title>
   <meta name="description" content="The unified cinematic operating system for independent filmmakers. From screenplay and financing to set and distribution." />
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS (Local Runtime, 100% Sovereign & Zero External Tracking) -->
+  <script src="assets/js/tailwind.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -43,7 +43,7 @@
   <script src="assets/js/lucide.min.js"></script>
 
   <!-- Local Custom CSS -->
-  <link rel="stylesheet" href="assets/css/style.css?v=197100" />
+  <link rel="stylesheet" href="assets/css/style.css?v=197200" />
 </head>
 <body class="bg-[#050c08] text-[#f4f7f1] selection:bg-[#d4af37] selection:text-[#07150e]">
 
@@ -146,9 +146,16 @@
 
   <!-- Bottom Camera HUD -->
   <footer class="camera-hud camera-hud-bottom flex justify-between items-center z-50">
-    <div class="flex items-center gap-4">
-      <span class="text-white/40 text-[10px]">LENS: 35MM T1.5 ANAMORPHIC</span>
-      <span class="hidden md:inline text-white/40 text-[10px]">GATE: 35MM FULL APERTURE</span>
+    <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-white/40 text-[10px] font-mono">
+      <span>LENS: 35MM T1.5 ANAMORPHIC</span>
+      <span class="hidden md:inline text-white/20">•</span>
+      <span class="hidden md:inline">GATE: 35MM FULL APERTURE</span>
+      <span class="text-white/20">•</span>
+      <span class="hud-copyright text-white/50">© 2026 IF.</span>
+      <span class="text-white/20">•</span>
+      <button id="btnPrivacyPolicy" class="hud-privacy-btn pointer-events-auto text-[#d4af37]/80 hover:text-[#d4af37] border-b border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer font-bold tracking-wider" aria-haspopup="dialog" aria-controls="privacyModal">
+        [ PRIVACY POLICY ]
+      </button>
     </div>
 
     <!-- Bottom-Right Audio Controller & Tooltip (Hidden in Scene 00 Silent Prologue, appears on Scene 01+) -->
@@ -1205,8 +1212,111 @@
     </section>
   </main>
 
+  <!-- =========================================================================
+       LEGAL DOSSIER // PRIVACY POLICY MODAL (CINEMATIC CAMERA HUD THEMED)
+       ========================================================================= -->
+  <div id="privacyModal" class="privacy-modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <!-- Backdrop Blur -->
+    <div class="privacy-modal-backdrop absolute inset-0 bg-[#030805]/85 backdrop-blur-md transition-opacity"></div>
+
+    <!-- Modal Box: Dark Cinema Obsidian Glass with Gold Accents -->
+    <div class="privacy-modal-box relative z-10 w-full max-w-2xl max-h-[85vh] flex flex-col bg-[#07150e]/95 border border-[#d4af37]/35 rounded-2xl shadow-2xl shadow-black/90 overflow-hidden transform scale-95 transition-transform duration-300">
+      
+      <!-- Top Splice Line Accent -->
+      <div class="w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-70"></div>
+
+      <!-- Modal Header -->
+      <div class="p-5 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-mono text-[#d4af37] uppercase tracking-widest mb-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#ff334b] animate-pulse"></span>
+            <span>LEGAL DOSSIER // ZERO-TRACKING DECLARATION</span>
+          </div>
+          <h2 id="privacyModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Privacy Charter
+          </h2>
+          <p class="font-mono text-xs text-[#9bb098] mt-1">
+            Data Sovereignity & Intellectual Property for Independent Filmmakers
+          </p>
+        </div>
+        <button id="closePrivacyModalBtn" class="group flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/15 text-white/70 hover:text-white hover:bg-[#d4af37] hover:text-[#07150e] transition-all cursor-pointer" aria-label="Close Privacy Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-[#f4f7f1]/80 font-sans leading-relaxed custom-scrollbar">
+        <!-- 1. Zero Tracking -->
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>1. Zero-Cookie & Zero-Tracking Architecture</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            This presentation portal operates on a <strong>pure zero-tracking model</strong>. We do not use third-party tracking cookies, marketing pixels, social trackers (Meta, TikTok), or behavioral analytics services (Google Analytics, Hotjar). No non-essential cookies are stored on your device.
+          </p>
+        </div>
+
+        <!-- 2. Self-Hosted Infrastructure -->
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="server" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>2. 100% Self-Hosted Assets (No External Leakage)</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            All scripts, styling engines (Tailwind CSS, GSAP, Lenis, Lucide), video assets, and audio synthesizers are served locally from our sovereign infrastructure. Your IP address is never leaked or relayed to external advertising or content delivery networks.
+          </p>
+        </div>
+
+        <!-- 3. Technical Server Logs -->
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>3. Technical Server Logs (GDPR Art. 6(1)(f))</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            Our web servers automatically retain transient, strictly technical connection logs (timestamp, anonymized IP address, user-agent) purely to prevent denial-of-service (DDoS) attacks and ensure system integrity. This processing is founded on our legitimate interest under GDPR Article 6(1)(f).
+          </p>
+        </div>
+
+        <!-- 4. Intellectual Property in withif.app -->
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="lock" class="w-4 h-4 text-[#d4af37]"></i>
+            <span>4. Creative IP Protection (The Independent Filmmaker OS)</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            When you transition to the working environment (<strong>withif.app</strong> via "ENTER OS"), all screenplays, director’s statements, pitch documents, and financial recoupment charts remain your <strong>exclusive, unencumbered intellectual property</strong>. We will never sell, license, or feed your creative works into public AI training corpuses.
+          </p>
+        </div>
+
+        <!-- 5. User Rights & Contact -->
+        <div class="bg-black/30 p-4 rounded-xl border border-white/5">
+          <div class="flex items-center gap-2 font-mono text-xs font-bold text-[#d4af37] uppercase tracking-wider mb-1.5">
+            <i data-lucide="mail" class="w-4 h-4 text-[#38e07b]"></i>
+            <span>5. Your GDPR Rights & Contact</span>
+          </div>
+          <p class="text-xs text-gray-300 leading-normal">
+            Under GDPR, you retain full rights to access, rectification, erasure, and objection. For any inquiries regarding data protection or our zero-tracking architecture, contact our Data Privacy Officer directly at <a href="mailto:privacy@withif.app" class="text-[#d4af37] underline hover:opacity-80">privacy@withif.app</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 bg-black/40 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px]">
+        <span class="text-white/40">
+          © 2026 IF. // THE INDEPENDENT FILMMAKER OS. ALL RIGHTS RESERVED.
+        </span>
+        <button id="closePrivacyModalFooterBtn" class="px-5 py-2 rounded-lg border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] font-bold tracking-wider transition-all cursor-pointer">
+          [ CLOSE CHARTER ]
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Local Custom Scrollytelling Engine -->
-  <script src="assets/js/main.js?v=196500"></script>
+  <script src="assets/js/main.js?v=196600"></script>
 
   <script>
     if (typeof lucide !== 'undefined') {

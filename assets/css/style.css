@@ -581,6 +581,15 @@ body.scene-climax-active #hudSceneNumber {
   color: #07150e !important;
 }
 
+body.scene-climax-active .camera-hud-bottom .hud-copyright {
+  color: rgba(7, 21, 14, 0.6) !important;
+}
+
+body.scene-climax-active #btnPrivacyPolicy {
+  color: #07150e !important;
+  border-color: rgba(7, 21, 14, 0.45) !important;
+}
+
 .rec-badge {
   display: inline-flex;
   align-items: center;
@@ -875,4 +884,36 @@ html.lenis, html.lenis body { height: auto; }
 .enter-os-btn:active {
   transform: translateY(0) scale(0.98);
 }
+
+/* ==========================================================================
+   PRIVACY POLICY MODAL (CINEMATIC CAMERA HUD / CLASSIFIED DOSSIER THEME)
+   ========================================================================== */
+.privacy-modal-overlay {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.privacy-modal-overlay.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.privacy-modal-overlay.active .privacy-modal-box {
+  transform: scale(1) !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.7);
+}
+
 
