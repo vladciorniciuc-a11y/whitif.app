@@ -140,6 +140,15 @@ assert(byokDownloadPresent, '43. Desktop app download CTA, BYOK privacy guarante
 const auditModalAndPdfPresent = html.includes('id="auditModal"') && html.includes('withif-security-audit-data-disclosure.pdf') && html.includes('CLOUD AI USERS NOTICE');
 assert(auditModalAndPdfPresent, '44. Audit report modal, downloadable PDF document, and cloud AI training disclosure present');
 
+// 19. Section Title Badges use Scene. instead of Ch.
+const hasScenePrefixes = html.includes('Scene. 01') && html.includes('Scene. 04') && html.includes('Scene. 14') && !html.includes('Ch. 01');
+assert(hasScenePrefixes, '45. Section title badges use "Scene." prefix instead of "Ch."');
+
+// 20. Commercial Break Section is Centered in the Middle of the Page
+const commercialSectionHtml = html.split('id="scene-commercial-break"')[1]?.split('</section>')[0] || '';
+const isCommercialCentered = commercialSectionHtml.includes('justify-center items-center') && commercialSectionHtml.includes('text-center');
+assert(isCommercialCentered, '46. Commercial Break section content is centered in the middle of the page');
+
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
 console.log(`PASSED: ${passCount}`);

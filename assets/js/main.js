@@ -354,6 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const motto = section.querySelector('.section-motto');
     const card = section.querySelector('.feature-card');
 
+    const commercialBox = section.querySelector('.commercial-break-box');
+    if (commercialBox) {
+      gsap.fromTo(commercialBox, 
+        { opacity: 0.2, y: -10, scale: 0.95 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out', delay: 0.1 }
+      );
+    }
+
     if (badge) {
       gsap.fromTo(badge, 
         { opacity: 0.2, x: -14 }, 
