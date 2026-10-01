@@ -1266,8 +1266,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       theSetViewer = pannellum.viewer('theSetPanorama', {
-        type: 'equirectangular',
-        panorama: 'assets/images/the_set_360.jpg',
+        type: 'cubemap',
+        cubeMap: [
+          'assets/images/the_set_front.jpg',
+          'assets/images/the_set_right.jpg',
+          'assets/images/the_set_back.jpg',
+          'assets/images/the_set_left.jpg',
+          'assets/images/the_set_up.jpg',
+          'assets/images/the_set_down.jpg'
+        ],
         autoLoad: true,
         autoRotate: -2.0,
         autoRotateInactivityDelay: 3000,

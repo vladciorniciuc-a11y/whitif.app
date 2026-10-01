@@ -171,6 +171,10 @@ assert(theSetCssStyles, '52. Emerald green marker styling (#38e07b) and 360 cont
 const theSetGlobeIconPresent = html.includes('id="theSetCenterGlobe"') && html.includes('the-set-center-globe') && css.includes('.the-set-center-globe');
 assert(theSetGlobeIconPresent, '53. Central 360° globe icon badge present in the middle of the 360 panorama');
 
+const theSetCubemapConfigured = js.includes("type: 'cubemap'") && js.includes('the_set_front.jpg') && js.includes('the_set_back.jpg');
+const allCubemapFilesExist = ['the_set_front.jpg', 'the_set_right.jpg', 'the_set_back.jpg', 'the_set_left.jpg', 'the_set_up.jpg', 'the_set_down.jpg'].every(f => fs.existsSync(path.join(__dirname, 'assets', 'images', f)));
+assert(theSetCubemapConfigured && allCubemapFilesExist, '54. 6-face CubeMap (front, right, back, left, up, down) properly configured and verified on disk');
+
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
 console.log(`PASSED: ${passCount}`);
