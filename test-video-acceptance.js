@@ -168,6 +168,9 @@ assert(theSetJsController, '51. JavaScript controllers for 360 panorama initiali
 const theSetCssStyles = css.includes('.roadmap-dot.the-set-dot') && css.includes('#38e07b') && css.includes('.the-set-panorama-container');
 assert(theSetCssStyles, '52. Emerald green marker styling (#38e07b) and 360 container styles defined in CSS');
 
+const theSetGlobeIconPresent = html.includes('id="theSetCenterGlobe"') && html.includes('the-set-center-globe') && css.includes('.the-set-center-globe');
+assert(theSetGlobeIconPresent, '53. Central 360° globe icon badge present in the middle of the 360 panorama');
+
 console.log('\n====================================================');
 console.log(`TOTAL ACCEPTANCE CHECKS: ${passCount + failCount}`);
 console.log(`PASSED: ${passCount}`);

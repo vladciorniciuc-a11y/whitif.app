@@ -408,6 +408,28 @@ body.epoch-digital .margin-rail {
   animation: spinSlow 9s linear infinite;
 }
 
+/* Central 360° Globe Icon Badge */
+@keyframes globeFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+.the-set-center-globe {
+  animation: globeFloat 4.5s ease-in-out infinite;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.the-set-center-globe.faded {
+  animation: none !important;
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.75) !important;
+  pointer-events: none !important;
+}
+
 
 #scene-14 .video-backdrop {
   opacity: 0.88;

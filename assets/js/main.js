@@ -1269,7 +1269,8 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'equirectangular',
         panorama: 'assets/images/the_set_360.jpg',
         autoLoad: true,
-        autoRotate: -1.2,
+        autoRotate: -2.0,
+        autoRotateInactivityDelay: 3000,
         compass: false,
         showControls: false,
         mouseZoom: false,
@@ -1278,12 +1279,16 @@ document.addEventListener('DOMContentLoaded', () => {
         maxHfov: 120
       });
 
-      // Fade out 360 gesture cue on first user interaction
+      // Fade out 360 gesture cue & central 360 globe badge on first user interaction
       const fadeCue = () => {
         const cue = document.getElementById('theSet360Cue');
+        const globe = document.getElementById('theSetCenterGlobe');
         if (cue) {
           cue.style.opacity = '0';
           cue.style.pointerEvents = 'none';
+        }
+        if (globe) {
+          globe.classList.add('faded');
         }
       };
       container.addEventListener('mousedown', fadeCue, { once: true });
