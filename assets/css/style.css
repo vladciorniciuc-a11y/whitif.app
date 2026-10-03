@@ -434,6 +434,83 @@ body.epoch-digital .margin-rail {
   pointer-events: none !important;
 }
 
+/* Presenter Stage & Transparent Cutout Architecture */
+.the-set-presenter-stage {
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.the-set-contact-shadow {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Sound Button: Initial Floating Target (where presenter points) -> Docks Bottom-Right on Click */
+.the-set-sound-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(clamp(70px, 12vw, 160px), -50%);
+  transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 35;
+}
+
+@media (max-width: 640px) {
+  .the-set-sound-wrapper {
+    top: auto;
+    bottom: 24%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Docked state: moves cleanly to bottom-right corner */
+.the-set-sound-wrapper.docked-bottom-right {
+  top: auto !important;
+  left: auto !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  transform: none !important;
+}
+
+@media (min-width: 640px) {
+  .the-set-sound-wrapper.docked-bottom-right {
+    bottom: 2.25rem !important;
+    right: 3rem !important;
+  }
+}
+
+/* Beacon pulse animation when awaiting click */
+@keyframes soundBeaconPulse {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+  70% { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(212, 175, 55, 0); }
+  100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+.the-set-sound-wrapper:not(.docked-bottom-right) .the-set-sound-btn {
+  animation: soundBeaconPulse 2.2s infinite;
+}
+
+/* Subtitle bar animation */
+.the-set-subtitles-bar {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.the-set-subtitles-bar.visible {
+  opacity: 1 !important;
+  transform: translate(-50%, 0) !important;
+}
+
+/* Facebook 360 Style Mouse Cue Fade */
+.the-set-mouse-cue {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.the-set-mouse-cue.faded {
+  opacity: 0 !important;
+  transform: translate(-50%, 14px) !important;
+  pointer-events: none !important;
+}
+
 
 #scene-14 .video-backdrop {
   opacity: 0.88;

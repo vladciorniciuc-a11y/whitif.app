@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const roadmapDots = document.querySelectorAll('.roadmap-dot');
   const progressBar = document.getElementById('roadmapProgressBar');
   const totalSections = storySections.length;
+  let isTheSetSpeechActive = false;
 
   // 1. Initialize Lenis Smooth Scroll Engine
   // Note: virtualScroll is set to bypass arbitrary pixel scrolling,
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const parentSection = video.closest('.story-section');
     const isFinale = parentSection && parentSection.id === 'scene-14';
     const isHero = parentSection && parentSection.id === 'scene-00';
-    const isPresenter = video.id === 'theSetPresenterVideo';
+    const isPresenter = video.id === 'theSetPresenterVideo' || video.id === 'theSetPresenterVideoTalk';
 
     // Scene 14 (Spotlight Finale Climax) and The Set Presenter remain in continuous loop; scenes 00-13 stop at last frame (no loop)
     if (isFinale || isPresenter) {
@@ -487,7 +488,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (targetSection.id === 'scene-the-set') {
       initTheSet360();
       const presenterVid = document.getElementById('theSetPresenterVideo');
-      if (presenterVid) presenterVid.play().catch(() => {});
+      const presenterVidTalk = document.getElementById('theSetPresenterVideoTalk');
+      if (isTheSetSpeechActive && presenterVidTalk) {
+        presenterVidTalk.play().catch(() => {});
+      } else if (presenterVid) {
+        presenterVid.play().catch(() => {});
+      }
     }
 
     // Trigger refined text reveal
@@ -534,12 +540,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Pause The Set presenter video if not currently on scene-the-set
+    // Pause The Set presenter videos if not currently on scene-the-set
     const currentSec = storySections[settledIndex];
     const isTheSet = currentSec && currentSec.id === 'scene-the-set';
     const presenterVid = document.getElementById('theSetPresenterVideo');
-    if (presenterVid && !isTheSet && !presenterVid.paused) {
-      presenterVid.pause();
+    const presenterVidTalk = document.getElementById('theSetPresenterVideoTalk');
+    if (!isTheSet) {
+      if (presenterVid && !presenterVid.paused) presenterVid.pause();
+      if (presenterVidTalk && !presenterVidTalk.paused) presenterVidTalk.pause();
     }
 
     // Release transition lock cleanly
@@ -862,6 +870,16 @@ document.addEventListener('DOMContentLoaded', () => {
         triggerHeartbeatPulse();
         if (heartbeatTimer) clearInterval(heartbeatTimer);
         heartbeatTimer = setInterval(triggerHeartbeatPulse, 1150);
+
+        // Synchronize The Set presenter speech video and button
+        const presenterVidTalk = document.getElementById('theSetPresenterVideoTalk');
+        if (presenterVidTalk && isTheSetSpeechActive) {
+          presenterVidTalk.muted = false;
+          presenterVidTalk.play().catch(() => {});
+        }
+        if (typeof updateTheSetSoundButton === 'function') {
+          updateTheSetSoundButton(true);
+        }
       } else {
         masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.3);
         audioBtn.classList.remove('text-[#d4af37]', 'border-[#d4af37]');
@@ -874,6 +892,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         allVideos.forEach(v => { v.muted = true; });
+
+        // Mute The Set presenter speech video and button
+        const presenterVidTalk = document.getElementById('theSetPresenterVideoTalk');
+        if (presenterVidTalk && isTheSetSpeechActive) {
+          presenterVidTalk.muted = true;
+        }
+        if (typeof updateTheSetSoundButton === 'function') {
+          updateTheSetSoundButton(false);
+        }
 
         if (heartbeatTimer) {
           clearInterval(heartbeatTimer);
@@ -1279,11 +1306,15 @@ document.addEventListener('DOMContentLoaded', () => {
         maxHfov: 110
       });
 
-      // Fade out central 360 globe badge on first user interaction
+      // Fade out central 360 globe badge and mouse cue on first user interaction
       const fadeCue = () => {
         const globe = document.getElementById('theSetCenterGlobe');
+        const mouseCue = document.getElementById('theSetMouseCue');
         if (globe) {
           globe.classList.add('faded');
+        }
+        if (mouseCue) {
+          mouseCue.classList.add('faded');
         }
       };
       container.addEventListener('mousedown', fadeCue, { once: true });
@@ -1293,35 +1324,180 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Presenter Sound Button Toggle: [ TAP FOR SOUND 🎙️ ]
+  // Presenter Dual-Video Sequence, Global Audio Unlock, Subtitles & Docking Button
   const btnTheSetSound = document.getElementById('btnTheSetSound');
+  const theSetSoundWrapper = document.getElementById('theSetSoundWrapper');
   const theSetPresenterVideo = document.getElementById('theSetPresenterVideo');
+  const theSetPresenterVideoTalk = document.getElementById('theSetPresenterVideoTalk');
   const theSetSoundIcon = document.getElementById('theSetSoundIcon');
   const theSetSoundText = document.getElementById('theSetSoundText');
+  const theSetSubtitlesBar = document.getElementById('theSetSubtitlesBar');
+  const theSetSubtitleText = document.getElementById('theSetSubtitleText');
 
-  if (btnTheSetSound && theSetPresenterVideo) {
+  const theSetSubtitleCues = [
+    { start: 0.0, end: 3.8, text: "Welcome to The Set. This is the sovereign workspace built for independent filmmakers." },
+    { start: 3.8, end: 8.2, text: "From scriptwriting and budgeting, to virtual production and color grading..." },
+    { start: 8.2, end: 12.8, text: "Everything runs locally on your machine. Zero tracking. Zero cloud lock-in." },
+    { start: 12.8, end: 18.0, text: "Click and drag with your mouse in 360° to explore our four core production departments." }
+  ];
+
+  function updateTheSetSoundButton(active) {
+    if (!btnTheSetSound) return;
+    if (active) {
+      if (theSetSoundText) theSetSoundText.textContent = 'SOUND [ON] 🎙️';
+      btnTheSetSound.className = 'the-set-sound-btn px-4 py-2.5 rounded-full border border-[#38e07b] bg-[#38e07b] text-[#07150e] text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-[0_0_25px_rgba(56,224,123,0.45)] backdrop-blur-md';
+      if (theSetSoundIcon) theSetSoundIcon.setAttribute('data-lucide', 'volume-2');
+    } else {
+      if (theSetSoundText) theSetSoundText.textContent = isTheSetSpeechActive ? 'SOUND [OFF] 🔇' : 'TAP FOR SOUND 🎙️';
+      btnTheSetSound.className = 'the-set-sound-btn px-4 py-2.5 rounded-full border border-[#d4af37]/60 bg-[#07150e]/90 text-[#d4af37] text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(212,175,55,0.25)] backdrop-blur-md';
+      if (theSetSoundIcon) theSetSoundIcon.setAttribute('data-lucide', 'volume-x');
+    }
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  }
+
+  // Live Subtitle synchronization
+  if (theSetPresenterVideoTalk) {
+    theSetPresenterVideoTalk.addEventListener('timeupdate', () => {
+      const ct = theSetPresenterVideoTalk.currentTime;
+      const currentCue = theSetSubtitleCues.find(cue => ct >= cue.start && ct < cue.end);
+      if (currentCue) {
+        if (theSetSubtitleText && theSetSubtitleText.textContent !== currentCue.text) {
+          theSetSubtitleText.textContent = currentCue.text;
+        }
+        if (theSetSubtitlesBar) theSetSubtitlesBar.classList.add('visible');
+      }
+    });
+  }
+
+  if (btnTheSetSound) {
     btnTheSetSound.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (theSetPresenterVideo.muted) {
-        theSetPresenterVideo.muted = false;
-        theSetPresenterVideo.play().catch(() => {});
-        if (theSetSoundText) theSetSoundText.textContent = 'SOUND [ON] 🎙️';
-        btnTheSetSound.classList.add('bg-[#38e07b]', 'text-[#07150e]', 'border-[#38e07b]');
-        btnTheSetSound.classList.remove('bg-[#d4af37]/10', 'text-[#d4af37]', 'border-[#d4af37]');
-        if (theSetSoundIcon) {
-          theSetSoundIcon.setAttribute('data-lucide', 'volume-2');
+
+      // Case 1: First click -> Activate Presenter Speech Video & Dock Button to Bottom-Right
+      if (!isTheSetSpeechActive) {
+        isTheSetSpeechActive = true;
+
+        // Dock Sound Button smoothly to bottom right
+        if (theSetSoundWrapper) {
+          theSetSoundWrapper.classList.add('docked-bottom-right');
+        }
+
+        // Unlock Global Web Audio
+        if (!audioCtx) initCinemaAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        isSoundOn = true;
+        if (masterGain && audioCtx) {
+          masterGain.gain.setTargetAtTime(0.65, audioCtx.currentTime, 0.4);
+        }
+
+        // Synchronize HUD Sound Controller
+        if (audioBtn) audioBtn.classList.add('text-[#d4af37]', 'border-[#d4af37]');
+        if (audioStatusText) audioStatusText.textContent = 'SOUND [ON]';
+        const audioIcon = document.getElementById('audioIcon');
+        if (audioIcon) {
+          audioIcon.setAttribute('data-lucide', 'volume-2');
+          audioIcon.classList.remove('text-white/70');
+          audioIcon.classList.add('text-[#d4af37]');
+        }
+
+        // Unmute all site backdrop videos (excluding Scene 00 if silent)
+        allVideos.forEach((v, vIdx) => {
+          if (vIdx !== 0 && v.id !== 'theSetPresenterVideo') {
+            v.muted = false;
+          }
+        });
+
+        // Start heartbeat ambience
+        triggerHeartbeatPulse();
+        if (heartbeatTimer) clearInterval(heartbeatTimer);
+        heartbeatTimer = setInterval(triggerHeartbeatPulse, 1150);
+
+        // Update Button Appearance to Docked Active
+        updateTheSetSoundButton(true);
+
+        // Smooth Cross-Fade: Video 1 (Idle) fades out, Video 2 (Speech) starts with sound
+        if (theSetPresenterVideo) {
+          theSetPresenterVideo.classList.remove('opacity-100');
+          theSetPresenterVideo.classList.add('opacity-0');
+          setTimeout(() => {
+            if (!theSetPresenterVideo.paused) theSetPresenterVideo.pause();
+          }, 700);
+        }
+
+        if (theSetPresenterVideoTalk) {
+          theSetPresenterVideoTalk.muted = false;
+          theSetPresenterVideoTalk.currentTime = 0;
+          theSetPresenterVideoTalk.classList.remove('opacity-0');
+          theSetPresenterVideoTalk.classList.add('opacity-100');
+          theSetPresenterVideoTalk.play().catch(() => {});
+        }
+
+        // Show cinematic subtitle bar
+        if (theSetSubtitlesBar) {
+          theSetSubtitlesBar.classList.add('visible');
         }
       } else {
-        theSetPresenterVideo.muted = true;
-        if (theSetSoundText) theSetSoundText.textContent = 'TAP FOR SOUND 🎙️';
-        btnTheSetSound.classList.remove('bg-[#38e07b]', 'text-[#07150e]', 'border-[#38e07b]');
-        btnTheSetSound.classList.add('bg-[#d4af37]/10', 'text-[#d4af37]', 'border-[#d4af37]');
-        if (theSetSoundIcon) {
-          theSetSoundIcon.setAttribute('data-lucide', 'volume-x');
+        // Case 2: Subsequent clicks -> Toggle Sound ON / OFF on the whole site & presenter
+        isSoundOn = !isSoundOn;
+
+        if (isSoundOn) {
+          if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+          if (masterGain && audioCtx) {
+            masterGain.gain.setTargetAtTime(0.65, audioCtx.currentTime, 0.4);
+          }
+          if (audioBtn) audioBtn.classList.add('text-[#d4af37]', 'border-[#d4af37]');
+          if (audioStatusText) audioStatusText.textContent = 'SOUND [ON]';
+          const audioIcon = document.getElementById('audioIcon');
+          if (audioIcon) {
+            audioIcon.setAttribute('data-lucide', 'volume-2');
+            audioIcon.classList.remove('text-white/70');
+            audioIcon.classList.add('text-[#d4af37]');
+          }
+
+          allVideos.forEach((v, vIdx) => {
+            if (vIdx !== 0 && v.id !== 'theSetPresenterVideo') {
+              v.muted = false;
+            }
+          });
+
+          if (theSetPresenterVideoTalk) {
+            theSetPresenterVideoTalk.muted = false;
+            theSetPresenterVideoTalk.play().catch(() => {});
+          }
+
+          triggerHeartbeatPulse();
+          if (heartbeatTimer) clearInterval(heartbeatTimer);
+          heartbeatTimer = setInterval(triggerHeartbeatPulse, 1150);
+
+          updateTheSetSoundButton(true);
+        } else {
+          if (masterGain && audioCtx) {
+            masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.3);
+          }
+          if (audioBtn) audioBtn.classList.remove('text-[#d4af37]', 'border-[#d4af37]');
+          if (audioStatusText) audioStatusText.textContent = 'SOUND [OFF]';
+          const audioIcon = document.getElementById('audioIcon');
+          if (audioIcon) {
+            audioIcon.setAttribute('data-lucide', 'volume-x');
+            audioIcon.classList.add('text-white/70');
+            audioIcon.classList.remove('text-[#d4af37]');
+          }
+
+          allVideos.forEach(v => { v.muted = true; });
+
+          if (theSetPresenterVideoTalk) {
+            theSetPresenterVideoTalk.muted = true;
+          }
+
+          if (heartbeatTimer) {
+            clearInterval(heartbeatTimer);
+            heartbeatTimer = null;
+          }
+
+          updateTheSetSoundButton(false);
         }
-      }
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
       }
     });
   }

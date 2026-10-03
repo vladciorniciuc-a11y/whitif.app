@@ -1097,29 +1097,50 @@
           </span>
         </div>
 
-        <!-- Standing Presenter Layer (Bottom-Left / Mid-Left) -->
-        <div class="the-set-presenter-wrapper absolute bottom-6 sm:bottom-10 left-4 sm:left-12 z-20 pointer-events-none select-none max-w-xs sm:max-w-sm flex flex-col justify-end">
-          <div class="the-set-presenter-card relative rounded-2xl overflow-hidden border border-[#d4af37]/40 shadow-2xl bg-[#07150e]/75 backdrop-blur-md pointer-events-auto">
-            <!-- Presenter Video (Placeholder) -->
-            <div class="relative w-full aspect-[4/5] max-h-[48vh] overflow-hidden bg-black/40">
-              <video id="theSetPresenterVideo" class="w-full h-full object-cover" autoplay loop muted playsinline>
-                <source src="videos/sample.mp4" type="video/mp4" />
-              </video>
-              <div class="absolute inset-0 bg-gradient-to-t from-[#07150e] via-transparent to-transparent opacity-90"></div>
-            </div>
+        <!-- Standing Presenter Stage (Dead-Center, Transparent Cutout Architecture) -->
+        <div class="the-set-presenter-stage absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none select-none flex flex-col items-center justify-end max-h-[82vh] w-auto">
+          <!-- Contact Shadow at feet -->
+          <div class="the-set-contact-shadow absolute bottom-1 w-52 sm:w-80 h-7 rounded-full filter blur-md pointer-events-none -z-10 scale-y-50"></div>
 
-            <!-- Presenter Audio Control Bar: [ TAP FOR SOUND 🎙️ ] -->
-            <div class="p-3 sm:p-3.5 bg-[#07150e] flex items-center justify-between gap-3 border-t border-white/10">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#38e07b] animate-ping"></span>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-[#38e07b] font-bold">DIRECTOR HOST</span>
-              </div>
-              <button id="btnTheSetSound" class="the-set-sound-btn px-3 py-1.5 rounded-lg border border-[#d4af37] bg-[#d4af37]/10 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] text-[10px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-lg" aria-label="Toggle Host Sound">
-                <i data-lucide="volume-x" id="theSetSoundIcon" class="w-3.5 h-3.5"></i>
-                <span id="theSetSoundText">TAP FOR SOUND 🎙️</span>
-              </button>
-            </div>
+          <!-- Video 1: Presenter Idle / Pointer Loop (Muted, Autoplay, Loop) -->
+          <video id="theSetPresenterVideo" class="the-set-presenter-video max-h-[75vh] w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)] transition-opacity duration-700 opacity-100" autoplay loop muted playsinline>
+            <source src="videos/presenter_idle.webm" type="video/webm" />
+            <source src="videos/sample.mp4" type="video/mp4" />
+          </video>
+
+          <!-- Video 2: Presenter Speech with Audio (Hidden initially, plays on sound trigger) -->
+          <video id="theSetPresenterVideoTalk" class="the-set-presenter-video max-h-[75vh] w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.85)] transition-opacity duration-700 opacity-0 absolute bottom-0 pointer-events-none" playsinline preload="auto">
+            <source src="videos/presenter_talk.webm" type="video/webm" />
+            <source src="videos/sample.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Sound Button Wrapper (Initially Floating Target where Presenter Points -> Docks Bottom-Right) -->
+        <div id="theSetSoundWrapper" class="the-set-sound-wrapper pointer-events-auto">
+          <button id="btnTheSetSound" class="the-set-sound-btn px-4 py-2.5 rounded-full border border-[#d4af37] bg-[#07150e]/90 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#07150e] text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.4)] backdrop-blur-md" aria-label="Toggle Host Sound">
+            <i data-lucide="volume-x" id="theSetSoundIcon" class="w-4 h-4"></i>
+            <span id="theSetSoundText">TAP FOR SOUND 🎙️</span>
+          </button>
+        </div>
+
+        <!-- Live Subtitles Bar (Bottom-Center) -->
+        <div id="theSetSubtitlesBar" class="the-set-subtitles-bar absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-0 transition-all duration-500 max-w-lg sm:max-w-2xl w-[90%] text-center">
+          <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#07150e]/85 border border-[#38e07b]/40 backdrop-blur-md shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+            <span class="w-2 h-2 rounded-full bg-[#38e07b] animate-ping shrink-0"></span>
+            <p id="theSetSubtitleText" class="font-mono text-xs sm:text-sm text-white/95 tracking-wide leading-relaxed">
+              Welcome to The Set. This is the sovereign workspace for independent filmmakers.
+            </p>
           </div>
+        </div>
+
+        <!-- Facebook 360 Style Mouse Interaction Cue (Bottom Center) -->
+        <div id="theSetMouseCue" class="the-set-mouse-cue absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-25 pointer-events-none select-none flex flex-col items-center gap-1.5 transition-opacity duration-700">
+          <div class="w-5 h-8 rounded-full border-2 border-white/80 flex items-start justify-center p-1 shadow-lg bg-black/20 backdrop-blur-sm">
+            <div class="w-1 h-2 rounded-full bg-white animate-bounce"></div>
+          </div>
+          <span class="text-[10px] sm:text-xs font-sans tracking-wide text-white/90 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            Click and drag to look around
+          </span>
         </div>
 
         <!-- Lower-Third Ambient Caption: Clean without badge as requested -->
